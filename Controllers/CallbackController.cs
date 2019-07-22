@@ -40,11 +40,14 @@ namespace VkBot.Controllers
                 // Новое сообщение
                 case "message_new":
                     {
+                        var msg = Message.FromJson(new VkResponse(updates.Object));
                         _vkApi.Messages.Send(new MessagesSendParams
                         {
-                            Message = MesAnswer(updates)
+                            RandomId = new DateTime().Millisecond,
+                            PeerId = msg.PeerId.Value,
+                            Message = MesAnswer(msg.Text)
                         });
-                        
+
                         break;
                     }
             }
@@ -52,10 +55,9 @@ namespace VkBot.Controllers
             return Ok("ok");
         }
 
-        public string MesAnswer([FromBody] Updates updates)
+        public string MesAnswer(string msg)
         {
-            var msg = Message.FromJson(new VkResponse(updates.Object));
-            string mesg = msg.Text.ToLower();
+            string mesg = msg.ToLower();
             if (mesg.Contains("привет"))
                 return "Здарова.))";
             else if (mesg.Contains("как дела"))
