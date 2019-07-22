@@ -1,0 +1,9 @@
+/home/artem_gg/Documents/Projects/C#/FirstVkBot/VkBot/obj/Debug/netcoreapp2.2/VkBot.csprojAssemblyReference.cache
+/home/artem_gg/Documents/Projects/C#/FirstVkBot/VkBot/obj/Debug/netcoreapp2.2/VkBot.csproj.CoreCompileInputs.cache
+/home/artem_gg/Documents/Projects/C#/FirstVkBot/VkBot/obj/Debug/netcoreapp2.2/VkBot.RazorAssemblyInfo.cache
+/home/artem_gg/Documents/Projects/C#/FirstVkBot/VkBot/obj/Debug/netcoreapp2.2/VkBot.RazorAssemblyInfo.cs
+/home/artem_gg/Documents/Projects/C#/FirstVkBot/VkBot/obj/Debug/netcoreapp2.2/VkBot.AssemblyInfoInputs.cache
+/home/artem_gg/Documents/Projects/C#/FirstVkBot/VkBot/obj/Debug/netcoreapp2.2/VkBot.AssemblyInfo.cs
+/home/artem_gg/Documents/Projects/C#/FirstVkBot/VkBot/obj/Debug/netcoreapp2.2/VkBot.RazorTargetAssemblyInfo.cache
+/home/artem_gg/Documents/Projects/C#/FirstVkBot/VkBot/obj/Debug/netcoreapp2.2/VkBot.dll
+/home/artem_gg/Documents/Projects/C#/FirstVkBot/VkBot/obj/Debug/netcoreapp2.2/VkBot.pdb
