@@ -56,5 +56,33 @@ namespace VkBot.Controllers
 
             return Ok("ok");
         }
+
+        public void MesAnswer([FromBody] Updates updates)
+        {
+            var msg = Message.FromJson(new VkResponse(updates.Object));
+            string mesg = msg.Text.ToLower();
+            if (mesg.Contains("привет"))
+            {
+                _vkApi.Messages.Send(new MessagesSendParams
+                {
+                    Message = "Здарова.))"
+                });
+            }
+            else if (mesg.Contains("как дела"))
+            {
+                _vkApi.Messages.Send(new MessagesSendParams
+                {
+                    Message = "Збс, твои?)"
+                });
+            } 
+            else
+            {
+                _vkApi.Messages.Send(new MessagesSendParams
+                {
+                    Message = "Чёт я тебя не понял."
+                });
+            }
+        }
     }
 }
+
