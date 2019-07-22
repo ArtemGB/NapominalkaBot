@@ -1,0 +1,73 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/artem_gg/Documents/Projects/C#/FirstVkBot/VkBot/VkBot.csproj": {}
+  },
+  "projects": {
+    "/home/artem_gg/Documents/Projects/C#/FirstVkBot/VkBot/VkBot.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/artem_gg/Documents/Projects/C#/FirstVkBot/VkBot/VkBot.csproj",
+        "projectName": "VkBot",
+        "projectPath": "/home/artem_gg/Documents/Projects/C#/FirstVkBot/VkBot/VkBot.csproj",
+        "packagesPath": "/home/artem_gg/.nuget/packages/",
+        "outputPath": "/home/artem_gg/Documents/Projects/C#/FirstVkBot/VkBot/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/home/artem_gg/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.AspNetCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "Microsoft.AspNetCore.Razor.Design": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "VkNet": {
+              "target": "Package",
+              "version": "(, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}
