@@ -40,7 +40,11 @@ namespace VkBot.Controllers
                 // Новое сообщение
                 case "message_new":
                     {
-                        MesAnswer(updates);
+                        _vkApi.Messages.Send(new MessagesSendParams
+                        {
+                            Message = MesAnswer(updates)
+                        });
+                        
                         break;
                     }
             }
@@ -48,32 +52,16 @@ namespace VkBot.Controllers
             return Ok("ok");
         }
 
-        [HttpPost]
-        public void MesAnswer([FromBody] Updates updates)
+        public string MesAnswer([FromBody] Updates updates)
         {
             var msg = Message.FromJson(new VkResponse(updates.Object));
             string mesg = msg.Text.ToLower();
             if (mesg.Contains("привет"))
-            {
-                _vkApi.Messages.Send(new MessagesSendParams
-                {
-                    Message = "Здарова.))"
-                });
-            }
+                return "Здарова.))";
             else if (mesg.Contains("как дела"))
-            {
-                _vkApi.Messages.Send(new MessagesSendParams
-                {
-                    Message = "Збс, твои?)"
-                });
-            } 
+                return "Нормас.)";
             else
-            {
-                _vkApi.Messages.Send(new MessagesSendParams
-                {
-                    Message = "Чёт я тебя не понял."
-                });
-            }
+                return "Чёт я тебя не понимаю.";
         }
     }
 }
