@@ -48,6 +48,7 @@ namespace VkBot.Controllers
             return Ok("ok");
         }
 
+        [HttpPost]
         public void MesAnswer([FromBody] Updates updates)
         {
             var msg = Message.FromJson(new VkResponse(updates.Object));
