@@ -6,6 +6,8 @@ using VkNet.Utils;
 using VkNet.Abstractions;
 using VkNet.Model.RequestParams;
 using System;
+using VkNet.Enums.Filters;
+using System.Linq;
 
 namespace VkBot.Controllers
 {
@@ -37,14 +39,14 @@ namespace VkBot.Controllers
                         return Ok(_configuration["Config:Confirmation"]);
                     }
                 case "message_allow":
-                {
-                    _vkApi.Messages.Send(new MessagesSendParams
                     {
-                        RandomId = new DateTime().Millisecond,
-                        Message = SendMsg.FirstHellowMsg,
-                    });
-                    break;
-                }
+                        _vkApi.Messages.Send(new MessagesSendParams
+                        {
+                            RandomId = new DateTime().Millisecond,
+                            Message = SendMsg.FirstHellowMsg,
+                        });
+                        break;
+                    }
                 // Новое сообщение
                 case "message_new":
                     {
@@ -55,7 +57,6 @@ namespace VkBot.Controllers
                             PeerId = msg.PeerId.Value,
                             Message = MsgAnswer(msg.Text)
                         });
-
                         break;
                     }
             }
@@ -65,14 +66,25 @@ namespace VkBot.Controllers
 
         public string MsgAnswer(string msg)
         {
-            string mesg = msg.ToLower();
-            if (mesg.Contains("привет"))
+            string mess = msg.ToLower();
+            if (mess.Contains("привет"))
                 return SendMsg.HellowAnsw;
-            else if (mesg.Contains("как дела"))
+            else if (mess.Contains("как дела ") || mess.Contains("как дела?"))
                 return SendMsg.HowAreYouAnsw;
+            else if (mess == "Друг")
+            {
+                var users = _vkApi.Friends.Get(new VkNet.Model.RequestParams.FriendsGetParams
+                {
+                    UserId = 82749439,
+                    Count = 1,
+                    Fields = ProfileFields.FirstName,
+                });
+                 return users[0].FirstName;
+            }
             else
                 return SendMsg.DontUnderstadAnsw;
         }
+
     }
 }
 
