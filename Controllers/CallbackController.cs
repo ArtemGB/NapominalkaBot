@@ -36,7 +36,15 @@ namespace VkBot.Controllers
                     {
                         return Ok(_configuration["Config:Confirmation"]);
                     }
-
+                case "message_allow":
+                {
+                    _vkApi.Messages.Send(new MessagesSendParams
+                    {
+                        RandomId = new DateTime().Millisecond,
+                        Message = SendMsg.FirstHellowMsg,
+                    });
+                    break;
+                }
                 // Новое сообщение
                 case "message_new":
                     {
@@ -45,7 +53,7 @@ namespace VkBot.Controllers
                         {
                             RandomId = new DateTime().Millisecond,
                             PeerId = msg.PeerId.Value,
-                            Message = MesAnswer(msg.Text)
+                            Message = MsgAnswer(msg.Text)
                         });
 
                         break;
@@ -55,15 +63,15 @@ namespace VkBot.Controllers
             return Ok("ok");
         }
 
-        public string MesAnswer(string msg)
+        public string MsgAnswer(string msg)
         {
             string mesg = msg.ToLower();
             if (mesg.Contains("привет"))
-                return "Здарова.))";
+                return SendMsg.HellowAnsw;
             else if (mesg.Contains("как дела"))
-                return "Нормас.)";
+                return SendMsg.HowAreYouAnsw;
             else
-                return "Чёт я тебя не понимаю.";
+                return SendMsg.DontUnderstadAnsw;
         }
     }
 }
