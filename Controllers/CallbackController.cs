@@ -71,7 +71,7 @@ namespace VkBot.Controllers
                 return SendMsg.HellowAnsw;
             else if (mess.Contains("как дела ") || mess.Contains("как дела?"))
                 return SendMsg.HowAreYouAnsw;
-            else if (mess == "Друг")
+            else if (mess == "друг")
             return TestController.GetFriends(_vkApi);
             else
                 return SendMsg.DontUnderstadAnsw;
