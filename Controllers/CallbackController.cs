@@ -64,7 +64,6 @@ namespace VkBot.Controllers
             return Ok("ok");
         }
 
-        [HttpPost]
         public string MsgAnswer(string msg)
         {
             string mess = msg.ToLower();
@@ -73,15 +72,7 @@ namespace VkBot.Controllers
             else if (mess.Contains("как дела ") || mess.Contains("как дела?"))
                 return SendMsg.HowAreYouAnsw;
             else if (mess == "Друг")
-            {
-                var users = _vkApi.Friends.Get(new VkNet.Model.RequestParams.FriendsGetParams
-                {
-                    UserId = 82749439,
-                    Count = 1,
-                    Fields = ProfileFields.FirstName,
-                });
-                 return users[0].FirstName;
-            }
+            return TestController.GetFriends(_vkApi);
             else
                 return SendMsg.DontUnderstadAnsw;
         }
