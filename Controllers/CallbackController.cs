@@ -8,6 +8,7 @@ using VkNet.Model.RequestParams;
 using System;
 using VkNet.Enums.Filters;
 using System.Linq;
+using System.Collections;
 
 namespace VkBot.Controllers
 {
@@ -67,14 +68,15 @@ namespace VkBot.Controllers
         public string MsgAnswer(string msg)
         {
             string mess = msg.ToLower();
-            if (mess.Contains("привет"))
-                return SendMsg.HellowAnsw;
-            else if (mess.Contains("как дела ") || mess.Contains("как дела?"))
-                return SendMsg.HowAreYouAnsw;
-            else if (mess == "друг")
-            return TestController.GetFriends(_vkApi);
-            else
-                return SendMsg.DontUnderstadAnsw;
+            try
+            {
+                return SendMsg.Answers[mess];
+            }
+            catch (System.Exception)
+            {
+              return "Чёт я тебя не понял.( Напиши слово \"Инструкция\" и я скажу, что умею";   
+            }
+            
         }
 
     }

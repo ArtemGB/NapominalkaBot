@@ -11,8 +11,6 @@ using System.Linq;
 
 namespace VkBot.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     public class TestController : ControllerBase
     {
         [HttpPost]

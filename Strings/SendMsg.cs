@@ -8,5 +8,12 @@ namespace VkBot.Controllers
         public readonly static string HellowAnsw = "Здарова.))";
         public readonly static string HowAreYouAnsw = "Нормас, ты как?)";
         public readonly static string DontUnderstadAnsw = "Чёт я тебя не понял.(";
+
+        public readonly static Dictionary<string, string> Answers = new Dictionary<string, string>
+        {
+            {"привет", "Здарова"},
+            {"как дела?","Нормас.)"},
+            {"Инструкция","Её пока что делают)"}
+        };
     }
 }
