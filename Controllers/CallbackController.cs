@@ -66,6 +66,7 @@ namespace VkBot.Controllers
             return Ok("ok");
         }
 
+        [HttpPost]
         public string MsgAnswer(string msg)
         {
             string mess = msg.ToLower();
