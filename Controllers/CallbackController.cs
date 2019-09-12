@@ -70,7 +70,6 @@ namespace VkBot.Controllers
         public string MsgAnswer(string msg)
         {
             string mess = msg.ToLower();
-            AddTask("");
             try
             {
                 return SendMsg.Answers[mess];
