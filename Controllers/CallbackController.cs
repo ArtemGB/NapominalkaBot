@@ -69,10 +69,6 @@ namespace VkBot.Controllers
         public string MsgAnswer(string msg)
         {
             string mess = msg.ToLower();
-            _vkApi.Messages.Send(new MessagesSendParams
-                        {
-                            Message = "Ответ метода."
-                        });
             try
             {
                 return SendMsg.Answers[mess];
