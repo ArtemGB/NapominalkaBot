@@ -69,6 +69,7 @@ namespace VkBot.Controllers
         public string MsgAnswer(string msg)
         {
             string mess = msg.ToLower();
+            AddTask("");
             try
             {
                 return SendMsg.Answers[mess];
@@ -80,9 +81,13 @@ namespace VkBot.Controllers
             
         }
 
+        [HttpPost]
         public void AddTask(string TastText)
         {
-
+            _vkApi.Messages.Send(new MessagesSendParams
+                        {
+                            Message = MsgAnswer("Add Method Answer.")
+                        });
         }
 
     }
