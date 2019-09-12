@@ -8,7 +8,7 @@ using VkNet.Model.RequestParams;
 using System;
 using VkNet.Enums.Filters;
 using System.Linq;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace VkBot.Controllers
 {
@@ -21,6 +21,8 @@ namespace VkBot.Controllers
         /// </summary>
         private readonly IConfiguration _configuration;
         private readonly IVkApi _vkApi;
+
+        private List<string> Tasks = new List<string>();
 
         public CallbackController(IVkApi vkApi, IConfiguration configuration)
         {
@@ -44,7 +46,6 @@ namespace VkBot.Controllers
                         _vkApi.Messages.Send(new MessagesSendParams
                         {
                             RandomId = new DateTime().Millisecond,
-                            Message = SendMsg.FirstHellowMsg,
                         });
                         break;
                     }
@@ -68,6 +69,10 @@ namespace VkBot.Controllers
         public string MsgAnswer(string msg)
         {
             string mess = msg.ToLower();
+            _vkApi.Messages.Send(new MessagesSendParams
+                        {
+                            Message = "Ответ метода."
+                        });
             try
             {
                 return SendMsg.Answers[mess];
@@ -77,6 +82,11 @@ namespace VkBot.Controllers
               return "Чёт я тебя не понял.( Напиши слово \"Инструкция\" и я скажу, что умею";   
             }
             
+        }
+
+        public void AddTask(string TastText)
+        {
+
         }
 
     }
