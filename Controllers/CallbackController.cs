@@ -59,7 +59,7 @@ namespace VkBot.Controllers
                             PeerId = msg.PeerId.Value,
                             Message = MsgAnswer(msg.Text)
                         });
-                        //SendTestMsg(msg);
+                        SendTestMsg(msg);
                         break;
                     }
             }
