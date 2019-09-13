@@ -59,6 +59,7 @@ namespace VkBot.Controllers
                             PeerId = msg.PeerId.Value,
                             Message = MsgAnswer(msg.Text)
                         });
+                        SendTestMsg(msg);
                         break;
                     }
             }
@@ -75,17 +76,28 @@ namespace VkBot.Controllers
             }
             catch (System.Exception)
             {
-              return "Чёт я тебя не понял.( Напиши слово \"Инструкция\" и я скажу, что умею";   
+                return "Чёт я тебя не понял.( Напиши слово \"Инструкция\" и я скажу, что умею.";
             }
-            
+
+        }
+
+        public IActionResult SendTestMsg(Message msg)
+        {
+            _vkApi.Messages.Send(new MessagesSendParams
+            {
+                RandomId = new DateTime().Millisecond,
+                PeerId = msg.PeerId.Value,
+                Message = "Test Message"
+            });
+            return Ok("ok");
         }
 
         public void AddTask(string TastText)
         {
             _vkApi.Messages.Send(new MessagesSendParams
-                        {
-                            Message = MsgAnswer("Add Method Answer.")
-                        });
+            {
+                Message = MsgAnswer("Add Method Answer.")
+            });
         }
 
     }
