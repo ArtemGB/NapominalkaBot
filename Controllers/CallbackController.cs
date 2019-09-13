@@ -86,7 +86,7 @@ namespace VkBot.Controllers
             _vkApi.Messages.Send(new MessagesSendParams
             {
                 RandomId = new DateTime().Millisecond,
-                PeerId = 71947751,
+                UserId = 71947751,
                 Message = "Test Message"
             });
             return Ok("ok");
