@@ -80,7 +80,6 @@ namespace VkBot.Controllers
             
         }
 
-        [HttpPost]
         public void AddTask(string TastText)
         {
             _vkApi.Messages.Send(new MessagesSendParams
