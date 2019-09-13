@@ -9,7 +9,7 @@ namespace VkBot.Controllers
         {
             {"привет", "Здарова."},
             {"как дела?","Нормас.)"},
-            {"инструкция","её пока что делают.)"},
+            {"инструкция","Её пока что делают.)"},
         };
 
         public readonly static Dictionary<string, TaskDeleg> Tasks = new Dictionary<string, TaskDeleg>();

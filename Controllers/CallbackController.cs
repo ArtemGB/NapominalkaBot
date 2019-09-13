@@ -22,12 +22,15 @@ namespace VkBot.Controllers
         private readonly IConfiguration _configuration;
         private readonly IVkApi _vkApi;
 
+        private Tasker tasker;
+
         private List<string> Tasks = new List<string>();
 
         public CallbackController(IVkApi vkApi, IConfiguration configuration)
         {
             _configuration = configuration;
             _vkApi = vkApi;
+            tasker = new Tasker(_vkApi);
         }
 
         [HttpPost]
@@ -59,7 +62,7 @@ namespace VkBot.Controllers
                             PeerId = msg.PeerId.Value,
                             Message = MsgAnswer(msg.Text)
                         });
-                        SendTestMsg(msg);
+                        tasker.SendTestMsg(msg);
                         break;
                     }
             }
@@ -79,17 +82,6 @@ namespace VkBot.Controllers
                 return "Чёт я тебя не понял.( Напиши слово \"Инструкция\" и я скажу, что умею.";
             }
 
-        }
-
-        public IActionResult SendTestMsg(Message msg)
-        {
-            _vkApi.Messages.Send(new MessagesSendParams
-            {
-                RandomId = new DateTime().Millisecond,
-                UserId = 71947751,
-                Message = "Test Message"
-            });
-            return Ok("ok");
         }
 
         public void AddTask(string TastText)
