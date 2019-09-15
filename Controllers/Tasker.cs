@@ -3,29 +3,37 @@ using Microsoft.AspNetCore.Mvc;
 using VkNet.Model;
 using VkNet.Model.RequestParams;
 using VkNet.Abstractions;
+using System.Collections.Generic;
 
 namespace VkBot.Controllers
 {
     public class Tasker : ControllerBase
     {
-        private IVkApi _vkApi;
+        private IVkApi vkApi;
+        public delegate void TaskDeleg();
+        public delegate IActionResult TaskProcces();
+        public bool IsTaskCreatingInProgres;
         
-        public Tasker(IVkApi _vkApi)
+        public TaskMethods taskMethods = new TaskMethods();
+
+        public Dictionary<string, TaskDeleg> TaskControll = new Dictionary<string, TaskDeleg>()
         {
-            this._vkApi = _vkApi;
-        }
-
-        public IActionResult SendTestMsg(Message msg)
+            {"добавить", new TaskDeleg(Huy)}
+        };
+        
+        public Tasker(IVkApi vkApi)
         {
-            _vkApi.Messages.Send(new MessagesSendParams
-            {
-                RandomId = new DateTime().Millisecond,
-                UserId = 71947751,
-                Message = "This message has been send from other class."
-            });
-            return Ok("ok");
+            this.vkApi = vkApi;
         }
+       public static void Huy()
+       {
 
+       }
 
+       public static IActionResult Huy11()
+       {
+           return new OkObjectResult("ok");
+       }
+       
     }
 }

@@ -20,7 +20,7 @@ namespace VkBot.Controllers
         /// Конфигурация приложения
         /// </summary>
         private readonly IConfiguration _configuration;
-        private readonly IVkApi _vkApi;
+        private readonly IVkApi vkApi;
 
         private Tasker tasker;
 
@@ -29,8 +29,8 @@ namespace VkBot.Controllers
         public CallbackController(IVkApi vkApi, IConfiguration configuration)
         {
             _configuration = configuration;
-            _vkApi = vkApi;
-            tasker = new Tasker(_vkApi);
+            this.vkApi = vkApi;
+            tasker = new Tasker(this.vkApi);
         }
 
         [HttpPost]
@@ -46,7 +46,7 @@ namespace VkBot.Controllers
                     }
                 case "message_allow":
                     {
-                        _vkApi.Messages.Send(new MessagesSendParams
+                        vkApi.Messages.Send(new MessagesSendParams
                         {
                             RandomId = new DateTime().Millisecond,
                         });
@@ -56,18 +56,17 @@ namespace VkBot.Controllers
                 case "message_new":
                     {
                         var msg = Message.FromJson(new VkResponse(updates.Object));
-                        _vkApi.Messages.Send(new MessagesSendParams
+                        vkApi.Messages.Send(new MessagesSendParams
                         {
                             RandomId = new DateTime().Millisecond,
                             PeerId = msg.PeerId.Value,
                             Message = MsgAnswer(msg.Text)
                         });
-                        tasker.SendTestMsg(msg);
                         break;
                     }
             }
-
-            return Ok("ok");
+            return new OkObjectResult("ok");
+            //return Ok("ok");
         }
 
         public string MsgAnswer(string msg)
@@ -81,17 +80,6 @@ namespace VkBot.Controllers
             {
                 return "Чёт я тебя не понял.( Напиши слово \"Инструкция\" и я скажу, что умею.";
             }
-
         }
-
-        public void AddTask(string TastText)
-        {
-            _vkApi.Messages.Send(new MessagesSendParams
-            {
-                Message = MsgAnswer("Add Method Answer.")
-            });
-        }
-
     }
 }
-
