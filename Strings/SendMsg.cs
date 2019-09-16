@@ -10,5 +10,6 @@ namespace VkBot.Controllers
             {"как дела?","Нормас.)"},
             {"инструкция","Её пока что делают.)"},
         };
+        public readonly static string AddInstruction = "Напиши, что тебе напомнить.";
     }
 }

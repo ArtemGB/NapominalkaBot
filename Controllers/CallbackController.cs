@@ -72,22 +72,24 @@ namespace VkBot.Controllers
             {
                 case "добавить":
                     {
+                        IsTaskAddingInProgres = true;
+                        VKSendMsg(SendMsg.AddInstruction);
                         break;
                     }
                 default:
                     {
+                        try
+                        {
+                            Answer = SendMsg.Answers[mess];
+                        }
+                        catch (System.Exception)
+                        {
+                            Answer = "Чёт я тебя не понял.( Напиши слово \"Инструкция\" и я скажу, что умею.";
+                        }
+                        VKSendMsg(msg.PeerId.Value, Answer);
                         break;
                     }
             }
-            try
-            {
-                Answer = SendMsg.Answers[mess];
-            }
-            catch (System.Exception)
-            {
-                Answer = "Чёт я тебя не понял.( Напиши слово \"Инструкция\" и я скажу, что умею.";
-            }
-            VKSendMsg(msg.PeerId.Value, Answer);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -96,6 +98,11 @@ namespace VkBot.Controllers
         ///</summary>
 
         private List<string> Tasks = new List<string>();//Удалить потом.
-        public delegate IActionResult TaskDeleg();
+        public bool IsTaskAddingInProgres;
+
+        public void StartTaskAdding()
+        {
+
+        }
     }
 }

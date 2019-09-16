@@ -11,7 +11,6 @@ namespace VkBot.Controllers
     {
         private static IVkApi vkApi;
         public delegate IActionResult TaskProcces();
-        public bool IsTaskCreatingInProgres;
         public List<User> Users;
         
         public Tasker(IVkApi _vkApi)
@@ -19,13 +18,5 @@ namespace VkBot.Controllers
             vkApi = _vkApi;
         }
 
-        public static IActionResult StartAdding()
-        {
-            vkApi.Messages.Send(new MessagesSendParams
-            {
-                
-            });
-            return new OkObjectResult("ok");
-        }
     }
 }
