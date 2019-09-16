@@ -9,31 +9,23 @@ namespace VkBot.Controllers
 {
     public class Tasker : ControllerBase
     {
-        private IVkApi vkApi;
-        public delegate void TaskDeleg();
+        private static IVkApi vkApi;
         public delegate IActionResult TaskProcces();
         public bool IsTaskCreatingInProgres;
+        public List<User> Users;
         
-        public TaskMethods taskMethods = new TaskMethods();
-
-        public Dictionary<string, TaskDeleg> TaskControll = new Dictionary<string, TaskDeleg>()
+        public Tasker(IVkApi _vkApi)
         {
-            {"добавить", new TaskDeleg(Huy)}
-        };
-        
-        public Tasker(IVkApi vkApi)
-        {
-            this.vkApi = vkApi;
+            vkApi = _vkApi;
         }
-       public static void Huy()
-       {
 
-       }
-
-       public static IActionResult Huy11()
-       {
-           return new OkObjectResult("ok");
-       }
-       
+        public static IActionResult StartAdding()
+        {
+            vkApi.Messages.Send(new MessagesSendParams
+            {
+                
+            });
+            return new OkObjectResult("ok");
+        }
     }
 }
