@@ -50,7 +50,6 @@ namespace VkBot.Controllers
                         break;
                     }
             }
-<<<<<<< HEAD
             return Ok("ok");
         }
 
@@ -80,26 +79,6 @@ namespace VkBot.Controllers
                         break;
                     }
             }
-=======
-            return new OkObjectResult("ok");
-        }
-
-        public IActionResult VKSendMsg(long _PeerId, string MsgText)
-        {
-            vkApi.Messages.Send(new MessagesSendParams
-            {
-                RandomId = DateTime.Now.Millisecond + new Random().Next(),
-                PeerId = _PeerId,
-                Message = MsgText,
-            });
-            return Ok("ok");
-        }
-
-        public IActionResult MsgAnswer(Message msg)
-        {
-            string mess = msg.Text.ToLower();
-            string Answer;
->>>>>>> e1899d32bae5758f201d18acb5977397c327b9cc
             try
             {
                 Answer = SendMsg.Answers[mess];
@@ -109,10 +88,6 @@ namespace VkBot.Controllers
                 Answer = "Чёт я тебя не понял.( Напиши слово \"Инструкция\" и я скажу, что умею.";
             }
             VKSendMsg(msg.PeerId.Value, Answer);
-<<<<<<< HEAD
-=======
-            return Ok("ok");
->>>>>>> e1899d32bae5758f201d18acb5977397c327b9cc
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
