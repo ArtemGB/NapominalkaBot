@@ -19,16 +19,14 @@ namespace VkBot.Controllers
         /// <summary>
         /// Конфигурация приложения
         /// </summary>
-        private readonly IConfiguration _configuration;
+        private readonly IConfiguration configuration;
         private readonly IVkApi vkApi;
 
         private Tasker tasker;
 
-        private List<string> Tasks = new List<string>();
-
         public CallbackController(IVkApi vkApi, IConfiguration configuration)
         {
-            _configuration = configuration;
+            this.configuration = configuration;
             this.vkApi = vkApi;
             tasker = new Tasker(this.vkApi);
         }
@@ -42,26 +40,19 @@ namespace VkBot.Controllers
                 // Ключ-подтверждение
                 case "confirmation":
                     {
-                        return Ok(_configuration["Config:Confirmation"]);
-                    }
-                case "message_allow":
-                    {
-                        vkApi.Messages.Send(new MessagesSendParams
-                        {
-                            RandomId = new DateTime().Millisecond,
-                        });
-                        break;
+                        return Ok(configuration["Config:Confirmation"]);
                     }
                 // Новое сообщение
                 case "message_new":
                     {
                         var msg = Message.FromJson(new VkResponse(updates.Object));
-                        vkApi.Messages.Send(new MessagesSendParams
-                        {
-                            RandomId = new DateTime().Millisecond,
-                            PeerId = msg.PeerId.Value,
-                            Message = MsgAnswer(msg.Text)
-                        });
+                        // vkApi.Messages.Send(new MessagesSendParams
+                        // {
+                        //     RandomId = DateTime.Now.Millisecond + new Random().Next(),
+                        //     PeerId = msg.PeerId.Value,
+                        //     Message = MsgAnswer(msg.Text)
+                        // });
+                        MsgAnswer(msg);
                         break;
                     }
             }
@@ -69,17 +60,67 @@ namespace VkBot.Controllers
             //return Ok("ok");
         }
 
-        public string MsgAnswer(string msg)
+        public IActionResult VKSendMsg(long _PeerId, string MsgText)
         {
-            string mess = msg.ToLower();
+            vkApi.Messages.Send(new MessagesSendParams
+            {
+                RandomId = DateTime.Now.Millisecond + new Random().Next(),
+                PeerId = _PeerId,
+                Message = MsgText,
+            });
+            return Ok("ok");
+        }
+
+        public IActionResult MsgAnswer(Message msg)
+        {
+            string mess = msg.Text.ToLower();
+            string Answer;
             try
             {
-                return SendMsg.Answers[mess];
+                Answer = SendMsg.Answers[mess];
             }
             catch (System.Exception)
             {
-                return "Чёт я тебя не понял.( Напиши слово \"Инструкция\" и я скажу, что умею.";
+                Answer = "Чёт я тебя не понял.( Напиши слово \"Инструкция\" и я скажу, что умею.";
             }
+            VKSendMsg(msg.PeerId.Value, Answer);
+            return Ok("ok");
         }
+
+        // public string MsgAnswer(string msg)
+        // {
+        //     string mess = msg.ToLower();
+        //     try
+        //     {
+        //         return SendMsg.Answers[mess];
+        //     }
+        //     catch (System.Exception)
+        //     {
+        //         return "Чёт я тебя не понял.( Напиши слово \"Инструкция\" и я скажу, что умею.";
+        //     }
+        // }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///<summary>
+        ///Работа с задачами пользователей.
+        ///</summary>
+
+        private List<string> Tasks = new List<string>();//Удалить потом.
+        public delegate IActionResult TaskDeleg();
+        // public Dictionary<string, TaskDeleg> TaskControll = new Dictionary<string, TaskDeleg>()
+        // {
+        //     {"добавить", new TaskDeleg(StartAdding)}
+        // };
+
+        // public static IActionResult StartAdding()
+        // {
+        //     vkApi.Messages.Send(new MessagesSendParams
+        //     {
+        //         RandomId = DateTime.Now.Millisecond + new Random().Next(),
+        //         PeerId = ,
+        //         Message = ,
+        //     });
+        //     return new OkObjectResult("ok");
+        // }
     }
 }
