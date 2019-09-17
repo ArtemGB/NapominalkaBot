@@ -69,7 +69,7 @@ namespace VkBot.Controllers
         public void MsgReceiver(Message msg)
         {
             string mess = msg.Text.ToLower();
-            if (IsTaskChangingInProgress)
+            if (IsTaskChangingInProgress == true)
             {
                 VKSendMsg(msg.PeerId.Value, "Check");
                 TaskProcces(msg);
@@ -82,7 +82,7 @@ namespace VkBot.Controllers
                         StartTaskAdding(msg);
                         break;
                     }
-                    case "покажи":
+                case "покажи":
                     {
                         ShowTasks(msg);
                         break;
@@ -134,10 +134,10 @@ namespace VkBot.Controllers
 
         public static void ShowTasks(Message msg)
         {
-            string tasks  = "Твои напоминания:\n";
+            string tasks = "Твои напоминания:\n";
             foreach (var task in Tasks)
-                tasks+="\n" + task + "\n";
-                VKSendMsg(msg.PeerId.Value, tasks);
+                tasks += "\n" + task + "\n";
+            VKSendMsg(msg.PeerId.Value, tasks);
         }
     }
 }
