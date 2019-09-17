@@ -41,8 +41,8 @@ namespace VkBot.Controllers
         public static void AddTaskDate(Message msg)
         {
             string[] Time = msg.Text.Split(":");
-            DateTime TaskTime = DateTime.Now;
-            TaskTime.AddHours(3); //Поправка на московское время, т.к. сервер находится в Европе.
+            DateTime TaskTime = DateTime.Today;
+            //TaskTime.AddHours(3); //Поправка на московское время, т.к. сервер находится в Европе.
             TaskTime.AddHours(Convert.ToDouble(Time[0]));
             TaskTime.AddMinutes(Convert.ToDouble(Time[1]));
             Tasks[Tasks.Count - 1] = (Tasks[Tasks.Count - 1].Item1, TaskTime);
@@ -52,10 +52,15 @@ namespace VkBot.Controllers
 
         public static void ShowTasks(Message msg)
         {
-            string tasks = "Твои напоминания:\n";
-            foreach (var task in Tasks)
-                tasks += "\n" + task.Item1 + " " + task.Item2.ToLongDateString() + " " + task.Item2.ToShortTimeString() + "\n";
-            VKSendMsg(msg.PeerId.Value, tasks);
+            if (Tasks.Count != 0)
+            {
+                string tasks = "Твои напоминания:\n";
+                foreach (var task in Tasks)
+                    tasks += "\n" + task.Item1 + " " + task.Item2.ToLongDateString() + " " + task.Item2.ToShortTimeString() + "\n";
+                VKSendMsg(msg.PeerId.Value, tasks);
+            }
+            else VKSendMsg(msg.PeerId.Value, SendMsg.EmptyTaskList);
+
         }
 
         public static IActionResult VKSendMsg(long _PeerId, string MsgText)
@@ -67,6 +72,12 @@ namespace VkBot.Controllers
                 Message = MsgText
             });
             return new OkObjectResult("ok");
+        }
+
+        public static void ClearTasks(long PeerId)
+        {
+            Tasks.Clear();
+            VKSendMsg(PeerId, SendMsg.ClearTasks);
         }
     }
 }

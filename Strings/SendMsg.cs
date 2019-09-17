@@ -11,6 +11,8 @@ namespace VkBot.Controllers
             {"инструкция","Напиши \"добавить\", чтобы добавить напоминание или \"покажи\", чтобы посмотреть список напоминаний"},
         };
         public readonly static string TaskAddingFistInstruction = "Что тебе напомнить?";
-        public readonly static string TaskDateAddingInstruction = "Во сколько тебе напомнить. Напиши в формате чч:мм.";
+        public readonly static string TaskDateAddingInstruction = "Напиши в формате дд.мм чч:мм.";
+        public readonly static string EmptyTaskList = "У вас нет напоминаний.";
+        public readonly static string ClearTasks = "Список напоминаний был очищен.";
     }
 }

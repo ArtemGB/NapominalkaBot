@@ -67,10 +67,10 @@ namespace VkBot.Controllers
 
         public void MsgReceiver(Message msg)
         {
-            string mess = msg.Text.ToLower();
+            string mess = msg.Text.ToLower(); //Переводим всё в нижний регистр.
+            mess = mess.Replace(".", "").Replace(",", "").Replace(")", "").Replace("(", ""); //Убираем лишние символы.
             if (Tasker.IsTaskChangingInProgress == true)
             {
-                //VKSendMsg(msg.PeerId.Value, "Check");
                 Tasker.TaskProcces(msg);
                 return;
             }
@@ -84,6 +84,11 @@ namespace VkBot.Controllers
                 case "покажи":
                     {
                         Tasker.ShowTasks(msg);
+                        break;
+                    }
+                case "очистить":
+                    {
+                        Tasker.ClearTasks(msg.PeerId.Value);
                         break;
                     }
                 default:
