@@ -23,13 +23,13 @@ namespace VkBot.Controllers
         private readonly IConfiguration configuration;
         private static IVkApi vkApi;
 
-        public static Tasker tasker;
+        //public static Tasker tasker;
 
         public CallbackController(IVkApi _vkApi, IConfiguration configuration)
         {
             this.configuration = configuration;
             vkApi = _vkApi;
-            tasker = new Tasker(vkApi);
+            //tasker = new Tasker(vkApi);
         }
 
         [HttpPost]
@@ -54,7 +54,7 @@ namespace VkBot.Controllers
             return Ok("ok");
         }
 
-        public static IActionResult VKSendMsg(long _PeerId, string MsgText)
+        public IActionResult VKSendMsg(long _PeerId, string MsgText)
         {
             vkApi.Messages.Send(new MessagesSendParams
             {
@@ -65,12 +65,12 @@ namespace VkBot.Controllers
             return new OkObjectResult("ok");
         }
 
-        public static void MsgReceiver(Message msg)
+        public void MsgReceiver(Message msg)
         {
             string mess = msg.Text.ToLower();
             if (Tasker.IsTaskChangingInProgress == true)
             {
-                VKSendMsg(msg.PeerId.Value, "Check");
+                //VKSendMsg(msg.PeerId.Value, "Check");
                 Tasker.TaskProcces(msg);
                 return;
             }
@@ -102,41 +102,5 @@ namespace VkBot.Controllers
                     }
             }
         }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///<summary>
-        ///Работа с задачами пользователей.
-        ///</summary>
-
-        // public static bool IsTaskChangingInProgress;
-        // public delegate void TaskDelegat(Message msg);
-        // public static TaskDelegat TaskProcces;
-        // public static List<string> Tasks = new List<string>();//Удалить потом.
-        // public static void StartTaskAdding(Message msg)
-        // {
-        //     IsTaskChangingInProgress = true;
-        //     VKSendMsg(msg.PeerId.Value, SendMsg.TaskAddingFistInstruction);
-        //     TaskProcces = AddTask;
-        // }
-
-        // public static void AddTask(Message msg)
-        // {
-        //     Tasks.Add(msg.Text);
-        //     TaskProcces = TaskAddingComplete;
-        // }
-
-        // public static void TaskAddingComplete(Message msg)
-        // {
-        //     VKSendMsg(msg.PeerId.Value, "Напоминание добавлено.");
-        //     IsTaskChangingInProgress = false;
-        // }
-
-        // public static void ShowTasks(Message msg)
-        // {
-        //     string tasks = "Твои напоминания:\n";
-        //     foreach (var task in Tasks)
-        //         tasks += "\n" + task + "\n";
-        //     VKSendMsg(msg.PeerId.Value, tasks);
-        // }
     }
 }

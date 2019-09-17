@@ -11,5 +11,6 @@ namespace VkBot.Controllers
             {"инструкция","Её пока что делают.)"},
         };
         public readonly static string TaskAddingFistInstruction = "Что тебе напомнить?";
+        public readonly static string TaskDateAddingInstruction = "Во сколько тебе напомнить. Напиши в формате чч:мм.";
     }
 }
