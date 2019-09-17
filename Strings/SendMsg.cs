@@ -7,7 +7,7 @@ namespace VkBot.Controllers
         public readonly static Dictionary<string, string> Answers = new Dictionary<string, string>
         {
             {"привет", "Здарова."},
-            {"как дела?","Нормас.)"},
+            {"как дела","Нормас.)"},
             {"инструкция","Напиши \"добавить\", чтобы добавить напоминание.\n Напиши \"покажи\", чтобы посмотреть список напоминаний. \n Напиши \"очистить\", чтобы очистить список задач."},
         };
         public readonly static string TaskAddingFistInstruction = "Что тебе напомнить?";

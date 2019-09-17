@@ -69,7 +69,7 @@ namespace VkBot.Controllers
         {
             string mess = msg.Text.ToLower(); //Переводим всё в нижний регистр.
             mess = mess.Replace(".", "").Replace(",", "").Replace(")", "").Replace("(", "").Replace("?", ""); //Убираем лишние символы.
-            if(msg.Text == "отмена" && Tasker.IsTaskChangingInProgress==true)
+            if (mess == "отмена" && Tasker.IsTaskChangingInProgress == true)
             {
                 Tasker.IsTaskChangingInProgress = false;
                 VKSendMsg(msg.PeerId.Value, SendMsg.Cancel);
