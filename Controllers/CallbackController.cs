@@ -81,6 +81,11 @@ namespace VkBot.Controllers
                         StartTaskAdding(msg);
                         break;
                     }
+                    case "покажи":
+                    {
+                        ShowTasks(msg);
+                        break;
+                    }
                 default:
                     {
                         string Answer;
@@ -118,6 +123,20 @@ namespace VkBot.Controllers
         {
             Tasks.Add(msg.Text);
             IsTaskChangingInProgress = false;
+            TaskProcces = TaskAddingComplete;
+        }
+
+        public void TaskAddingComplete(Message msg)
+        {
+            VKSendMsg(msg.PeerId.Value, "Напоминание добавлено.");
+        }
+
+        public void ShowTasks(Message msg)
+        {
+            string tasks  = "Твои напоминания:\n";
+            foreach (var task in Tasks)
+                tasks+="\n" + task + "\n";
+                VKSendMsg(msg.PeerId.Value, tasks);
         }
     }
 }
