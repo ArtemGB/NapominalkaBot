@@ -123,13 +123,13 @@ namespace VkBot.Controllers
         public static void AddTask(Message msg)
         {
             Tasks.Add(msg.Text);
-            IsTaskChangingInProgress = false;
             TaskProcces = TaskAddingComplete;
         }
 
         public static void TaskAddingComplete(Message msg)
         {
             VKSendMsg(msg.PeerId.Value, "Напоминание добавлено.");
+            IsTaskChangingInProgress = false;
         }
 
         public static void ShowTasks(Message msg)
