@@ -23,13 +23,13 @@ namespace VkBot.Controllers
         private readonly IConfiguration configuration;
         private static IVkApi vkApi;
 
-        //public static Tasker tasker;
+        public static Tasker tasker;
 
         public CallbackController(IVkApi _vkApi, IConfiguration configuration)
         {
             this.configuration = configuration;
             vkApi = _vkApi;
-            //tasker = new Tasker(vkApi);
+            tasker = new Tasker(vkApi);
         }
 
         [HttpPost]
