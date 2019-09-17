@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using System;
 using Microsoft.AspNetCore.Mvc;
 using VkNet.Model;
@@ -40,14 +41,27 @@ namespace VkBot.Controllers
 
         public static void AddTaskDate(Message msg)
         {
-            string[] Time = msg.Text.Split(":");
-            DateTime TaskTime = DateTime.Today;
+
             //TaskTime.AddHours(3); //Поправка на московское время, т.к. сервер находится в Европе.
-            TaskTime.AddHours(Convert.ToDouble(Time[0]));
-            TaskTime.AddMinutes(Convert.ToDouble(Time[1]));
-            Tasks[Tasks.Count - 1] = (Tasks[Tasks.Count - 1].Item1, TaskTime);
-            VKSendMsg(msg.PeerId.Value, "Напоминание добавлено.");
-            IsTaskChangingInProgress = false;
+            try
+            {
+                string[] DateAndTime = msg.Text.Split(' ');
+                string DateMMDD = DateAndTime[0], TimeHHMM = DateAndTime[1];
+                string[] Date = DateMMDD.Split(',', '.');
+                string[] Time = TimeHHMM.Split(':');
+                DateTime TaskTime = DateTime.Today;
+                TaskTime.AddDays(double.Parse(Date[0]));
+                TaskTime.AddMonths(int.Parse(Date[1]));
+                TaskTime.AddHours(double.Parse(Time[0]));
+                TaskTime.AddMinutes(double.Parse(Time[0]));
+                Tasks[Tasks.Count - 1] = (Tasks[Tasks.Count - 1].Item1, TaskTime);
+                VKSendMsg(msg.PeerId.Value, "Напоминание добавлено.");
+                IsTaskChangingInProgress = false;
+            }
+            catch (System.Exception)
+            {
+                VKSendMsg(msg.PeerId.Value, SendMsg.BadEntry);
+            }
         }
 
         public static void ShowTasks(Message msg)
