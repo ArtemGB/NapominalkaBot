@@ -73,6 +73,7 @@ namespace VkBot.Controllers
             {
                 Tasker.IsTaskChangingInProgress = false;
                 VKSendMsg(msg.PeerId.Value, SendMsg.Cancel);
+                return;
             }
             if (Tasker.IsTaskChangingInProgress == true)
             {
