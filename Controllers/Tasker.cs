@@ -42,6 +42,7 @@ namespace VkBot.Controllers
         {
             string[] Time = msg.Text.Split(":");
             DateTime TaskTime = DateTime.Now;
+            TaskTime.AddHours(3); //Поправка на московское время, т.к. сервер находится в Европе.
             TaskTime.AddHours(Convert.ToDouble(Time[0]));
             TaskTime.AddMinutes(Convert.ToDouble(Time[1]));
             Tasks[Tasks.Count - 1] = (Tasks[Tasks.Count - 1].Item1, TaskTime);
