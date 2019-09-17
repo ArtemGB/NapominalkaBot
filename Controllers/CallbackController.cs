@@ -66,7 +66,7 @@ namespace VkBot.Controllers
             return new OkObjectResult("ok");
         }
 
-        public void MsgReceiver(Message msg)
+        public static void MsgReceiver(Message msg)
         {
             string mess = msg.Text.ToLower();
             if (IsTaskChangingInProgress == true)
