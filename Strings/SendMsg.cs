@@ -8,8 +8,9 @@ namespace VkBot.Controllers
         {
             {"привет", "Здарова."},
             {"как дела?","Нормас.)"},
-            {"инструкция","Её пока что делают.)"},
+            {"инструкция","Напиши \"добавить\", чтобы добавить напоминание или \"покажи\", чтобы посмотреть список напоминаний"},
         };
-        public readonly static string AddInstruction = "Напиши, что тебе напомнить.";
+        public readonly static string TaskAddingFistInstruction = "Что тебе напомнить?";
+        public readonly static string TaskDateAddingInstruction = "Во сколько тебе напомнить. Напиши в формате чч:мм.";
     }
 }

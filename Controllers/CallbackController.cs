@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -20,15 +21,15 @@ namespace VkBot.Controllers
         /// Конфигурация приложения
         /// </summary>
         private readonly IConfiguration configuration;
-        private readonly IVkApi vkApi;
+        private static IVkApi vkApi;
 
-        private Tasker tasker;
+        public static Tasker tasker;
 
-        public CallbackController(IVkApi vkApi, IConfiguration configuration)
+        public CallbackController(IVkApi _vkApi, IConfiguration configuration)
         {
             this.configuration = configuration;
-            this.vkApi = vkApi;
-            tasker = new Tasker(this.vkApi);
+            vkApi = _vkApi;
+            tasker = new Tasker(vkApi);
         }
 
         [HttpPost]
@@ -46,7 +47,7 @@ namespace VkBot.Controllers
                 case "message_new":
                     {
                         var msg = Message.FromJson(new VkResponse(updates.Object));
-                        MsgAnswer(msg);
+                        MsgReceiver(msg);
                         break;
                     }
             }
@@ -59,25 +60,35 @@ namespace VkBot.Controllers
             {
                 RandomId = DateTime.Now.Millisecond + new Random().Next(),
                 PeerId = _PeerId,
-                Message = MsgText,
+                Message = MsgText
             });
-            return Ok("ok");
+            return new OkObjectResult("ok");
         }
 
-        public void MsgAnswer(Message msg)
+        public void MsgReceiver(Message msg)
         {
             string mess = msg.Text.ToLower();
-            string Answer;
+            if (Tasker.IsTaskChangingInProgress == true)
+            {
+                //VKSendMsg(msg.PeerId.Value, "Check");
+                Tasker.TaskProcces(msg);
+                return;
+            }
             switch (mess)
             {
                 case "добавить":
                     {
-                        IsTaskAddingInProgres = true;
-                        VKSendMsg(SendMsg.AddInstruction);
+                        Tasker.StartTaskAdding(msg);
+                        break;
+                    }
+                case "покажи":
+                    {
+                        Tasker.ShowTasks(msg);
                         break;
                     }
                 default:
                     {
+                        string Answer;
                         try
                         {
                             Answer = SendMsg.Answers[mess];
@@ -90,19 +101,6 @@ namespace VkBot.Controllers
                         break;
                     }
             }
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///<summary>
-        ///Работа с задачами пользователей.
-        ///</summary>
-
-        private List<string> Tasks = new List<string>();//Удалить потом.
-        public bool IsTaskAddingInProgres;
-
-        public void StartTaskAdding()
-        {
-
         }
     }
 }
