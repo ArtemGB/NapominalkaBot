@@ -21,15 +21,15 @@ namespace VkBot.Controllers
         /// Конфигурация приложения
         /// </summary>
         private readonly IConfiguration configuration;
-        private readonly IVkApi vkApi;
+        private static IVkApi vkApi;
 
         private Tasker tasker;
 
-        public CallbackController(IVkApi vkApi, IConfiguration configuration)
+        public CallbackController(IVkApi _vkApi, IConfiguration configuration)
         {
             this.configuration = configuration;
-            this.vkApi = vkApi;
-            tasker = new Tasker(this.vkApi);
+            vkApi = _vkApi;
+            tasker = new Tasker(vkApi);
             IsTaskChangingInProgress = false;
         }
 
@@ -55,7 +55,7 @@ namespace VkBot.Controllers
             return Ok("ok");
         }
 
-        public IActionResult VKSendMsg(long _PeerId, string MsgText)
+        public static IActionResult VKSendMsg(long _PeerId, string MsgText)
         {
             vkApi.Messages.Send(new MessagesSendParams
             {
@@ -63,7 +63,7 @@ namespace VkBot.Controllers
                 PeerId = _PeerId,
                 Message = MsgText
             });
-            return Ok("ok");
+            return new OkObjectResult("ok");
         }
 
         public void MsgReceiver(Message msg)
@@ -108,30 +108,30 @@ namespace VkBot.Controllers
         ///Работа с задачами пользователей.
         ///</summary>
 
-        public bool IsTaskChangingInProgress;
+        public static bool IsTaskChangingInProgress;
         public delegate void TaskDelegat(Message msg);
-        public TaskDelegat TaskProcces;
-        public List<string> Tasks = new List<string>();//Удалить потом.
-        public void StartTaskAdding(Message msg)
+        public static TaskDelegat TaskProcces;
+        public static List<string> Tasks = new List<string>();//Удалить потом.
+        public static void StartTaskAdding(Message msg)
         {
             IsTaskChangingInProgress = true;
             VKSendMsg(msg.PeerId.Value, SendMsg.TaskAddingFistInstruction);
             TaskProcces = AddTask;
         }
 
-        public void AddTask(Message msg)
+        public static void AddTask(Message msg)
         {
             Tasks.Add(msg.Text);
             IsTaskChangingInProgress = false;
             TaskProcces = TaskAddingComplete;
         }
 
-        public void TaskAddingComplete(Message msg)
+        public static void TaskAddingComplete(Message msg)
         {
             VKSendMsg(msg.PeerId.Value, "Напоминание добавлено.");
         }
 
-        public void ShowTasks(Message msg)
+        public static void ShowTasks(Message msg)
         {
             string tasks  = "Твои напоминания:\n";
             foreach (var task in Tasks)
