@@ -34,11 +34,6 @@ namespace VkBot.Controllers
         public static void AddTaskText(Message msg)
         {
             Tasks.Add((msg.Text, DateTime.Now));
-            TaskProcces = TaskAddingComplete;
-        }
-
-        public static void AddTaskDateInstruction(Message msg)
-        {
             VKSendMsg(msg.PeerId.Value, SendMsg.TaskDateAddingInstruction);
             TaskProcces = AddTaskDate;
         }
@@ -50,11 +45,6 @@ namespace VkBot.Controllers
             TaskTime.AddHours(Convert.ToDouble(Time[0]));
             TaskTime.AddMinutes(Convert.ToDouble(Time[1]));
             Tasks[Tasks.Count - 1] = (Tasks[Tasks.Count - 1].Item1, TaskTime);
-            TaskAddingComplete(msg);
-        }
-
-        public static void TaskAddingComplete(Message msg)
-        {
             VKSendMsg(msg.PeerId.Value, "Напоминание добавлено.");
             IsTaskChangingInProgress = false;
         }
