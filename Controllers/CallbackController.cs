@@ -71,6 +71,7 @@ namespace VkBot.Controllers
             string mess = msg.Text.ToLower();
             if (IsTaskChangingInProgress)
             {
+                VKSendMsg(msg.PeerId.Value, "Check");
                 TaskProcces(msg);
                 return;
             }
