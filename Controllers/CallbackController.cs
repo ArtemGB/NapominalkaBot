@@ -99,7 +99,7 @@ namespace VkBot.Controllers
                     }
                 case "время":
                     {
-                        VKSendMsg(msg.PeerId.Value, DateTime.Now.ToLocalTime().ToString());
+                        VKSendMsg(msg.PeerId.Value, DateTime.Now.AddHours(3).ToLocalTime().ToString());
                         break;
                     }
                 default:
