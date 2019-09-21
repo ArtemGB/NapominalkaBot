@@ -82,7 +82,7 @@ namespace VkBot.Controllers
             }
             switch (mess)
             {
-                case "добавить":
+                case "напомни":
                     {
                         Tasker.StartTaskAdding(msg);
                         break;
