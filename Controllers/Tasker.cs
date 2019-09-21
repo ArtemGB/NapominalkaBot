@@ -41,19 +41,25 @@ namespace VkBot.Controllers
 
         public static void AddTaskDate(Message msg)
         {
-
-            //TaskTime.AddHours(3); //Поправка на московское время, т.к. сервер находится в Европе.
             try
             {
                 string[] DateAndTime = msg.Text.Split(' ');
-                string DateMMDD = DateAndTime[0], TimeHHMM = DateAndTime[1];
+                string DateMMDD = DateAndTime[DateAndTime.Length - 2], TimeHHMM = DateAndTime[DateAndTime.Length - 1];
                 string[] Date = DateMMDD.Split(',', '.');
                 string[] Time = TimeHHMM.Split(':');
-                DateTime TaskTime = DateTime.Today;
-                TaskTime.AddDays(double.Parse(Date[0]));
-                TaskTime.AddMonths(int.Parse(Date[1]));
-                TaskTime.AddHours(double.Parse(Time[0]));
-                TaskTime.AddMinutes(double.Parse(Time[0]));
+                DateTime TaskTime = new DateTime();
+                if (DateAndTime[0] == "через")
+                {
+                    TaskTime = (DateTime)msg.Date;
+                    //TaskTime = DateTime.UtcNow.AddHours(3);
+                    TaskTime = TaskTime.AddDays(double.Parse(Date[0])).AddMonths(int.Parse(Date[1]))
+                .AddHours(double.Parse(Time[0])).AddMinutes(double.Parse(Time[1]));
+                }
+                else
+                {
+                    TaskTime = new DateTime(DateTime.UtcNow.Year, int.Parse(Date[1]), int.Parse(Date[0]),
+                     int.Parse(Time[0]), int.Parse(Time[1]), 0);
+                }
                 Tasks[Tasks.Count - 1] = (Tasks[Tasks.Count - 1].Item1, TaskTime);
                 VKSendMsg(msg.PeerId.Value, "Напоминание добавлено.");
                 IsTaskChangingInProgress = false;
