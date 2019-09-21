@@ -97,6 +97,11 @@ namespace VkBot.Controllers
                         Tasker.ClearTasks(msg.PeerId.Value);
                         break;
                     }
+                case "время":
+                    {
+                        VKSendMsg(msg.PeerId.Value, DateTime.Now.ToLocalTime().ToString());
+                        break;
+                    }
                 default:
                     {
                         string Answer;
