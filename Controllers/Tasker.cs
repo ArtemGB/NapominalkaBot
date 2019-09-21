@@ -48,10 +48,11 @@ namespace VkBot.Controllers
                 string[] Date = DateMMDD.Split(',', '.');
                 string[] Time = TimeHHMM.Split(':');
                 DateTime TaskTime = new DateTime();
-                DateAndTime[0].ToLower();
+                DateAndTime[0] = DateAndTime[0].ToLower();
                 if (DateAndTime[0] == "через")
                 {
-                    TaskTime = (DateTime)msg.Date;
+                    //TaskTime = (DateTime)msg.Date;
+                    TaskTime = DateTime.UtcNow.AddHours(3);
                     TaskTime = TaskTime.AddDays(double.Parse(Date[0])).AddMonths(int.Parse(Date[1]))
                 .AddHours(double.Parse(Time[0])).AddMinutes(double.Parse(Time[1]));
                 }
@@ -61,6 +62,11 @@ namespace VkBot.Controllers
                         throw new Exception();
                     TaskTime = new DateTime(DateTime.UtcNow.Year, int.Parse(Date[1]), int.Parse(Date[0]),
                      int.Parse(Time[0]), int.Parse(Time[1]), 0);
+                    if (TaskTime <= DateTime.UtcNow.AddHours(3))
+                    {
+                        VKSendMsg(msg.PeerId.Value, SendMsg.DateBeforeError);
+                        return;
+                    }
                 }
                 Tasks[Tasks.Count - 1] = (Tasks[Tasks.Count - 1].Item1, TaskTime);
                 VKSendMsg(msg.PeerId.Value, "Напоминание добавлено.");

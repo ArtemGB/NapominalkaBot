@@ -17,5 +17,6 @@ namespace VkBot.Controllers
         public readonly static string BadEntry = "Вы ввели неверные данные, попробуй ещё раз или напиши \"отмена\", если передумал.";
         public readonly static string ZeroOrVeryBigDate = "Значение полей дд.мм не могут быть равны нулю, значение месяца не может быть больше 12, а дней больше 31.";
         public readonly static string Cancel = "Отменено.";
+        public readonly static string DateBeforeError = "Боюсь, что уже слишком поздно, попробуй более позднее время.";
     }
 }
