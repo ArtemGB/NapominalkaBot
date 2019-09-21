@@ -102,7 +102,7 @@ namespace VkBot.Controllers
                         VKSendMsg(msg.PeerId.Value, DateTime.Now.AddHours(3).ToLocalTime().ToString());
                         break;
                     }
-                case "Время сообщения":
+                case "время сообщения":
                     {
                         VKSendMsg(msg.PeerId.Value, msg.Date.Value.ToString());
                         break;
