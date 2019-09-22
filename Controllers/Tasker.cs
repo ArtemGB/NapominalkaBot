@@ -5,6 +5,7 @@ using VkNet.Model;
 using VkNet.Model.RequestParams;
 using VkNet.Abstractions;
 using System.Collections.Generic;
+using VkBot.Users;
 
 namespace VkBot.Controllers
 {
@@ -16,26 +17,23 @@ namespace VkBot.Controllers
         private static IVkApi vkApi;
         public List<User> Users;
 
-        public Tasker(IVkApi _vkApi)
-        {
-            vkApi = _vkApi;
-        }
+        public Tasker(IVkApi _vkApi) => vkApi = _vkApi;
 
         public static bool IsTaskChangingInProgress;
         public delegate void TaskDelegat(Message msg);
-        public static TaskDelegat TaskProcces;
-        public static List<(string, DateTime)> Tasks = new List<(string, DateTime)>();//Удалить потом.
+        public static TaskDelegat TaskProcces; //Переключатель методогв выполнения операций с напоминаниями.
+        public static List<UserTask> Tasks = new List<UserTask>();//Удалить потом.
         public static void StartTaskAdding(Message msg)
         {
             IsTaskChangingInProgress = true;
-            VKSendMsg(msg.PeerId.Value, SendMsg.TaskAddingFistInstruction);
+            VKSendMsg(msg.PeerId.Value, MsgTexts.TaskAddingFistInstruction);
             TaskProcces = AddTaskText;
         }
 
         public static void AddTaskText(Message msg)
         {
-            Tasks.Add((msg.Text, DateTime.Now));
-            VKSendMsg(msg.PeerId.Value, SendMsg.TaskDateAddingInstruction);
+            Tasks.Add(new UserTask(msg.Text, DateTime.Now));
+            VKSendMsg(msg.PeerId.Value, MsgTexts.TaskDateAddingInstruction);
             TaskProcces = AddTaskDate;
         }
 
@@ -51,7 +49,6 @@ namespace VkBot.Controllers
                 DateAndTime[0] = DateAndTime[0].ToLower();
                 if (DateAndTime[0] == "через")
                 {
-                    //TaskTime = (DateTime)msg.Date;
                     TaskTime = DateTime.UtcNow.AddHours(3);
                     TaskTime = TaskTime.AddDays(double.Parse(Date[0])).AddMonths(int.Parse(Date[1]))
                 .AddHours(double.Parse(Time[0])).AddMinutes(double.Parse(Time[1]));
@@ -64,21 +61,21 @@ namespace VkBot.Controllers
                      int.Parse(Time[0]), int.Parse(Time[1]), 0);
                     if (TaskTime <= DateTime.UtcNow.AddHours(3))
                     {
-                        VKSendMsg(msg.PeerId.Value, SendMsg.DateBeforeError);
+                        VKSendMsg(msg.PeerId.Value, MsgTexts.DateBeforeError);
                         return;
                     }
                 }
-                Tasks[Tasks.Count - 1] = (Tasks[Tasks.Count - 1].Item1, TaskTime);
+                Tasks[Tasks.Count - 1].TaskDate = TaskTime;
                 VKSendMsg(msg.PeerId.Value, "Напоминание добавлено.");
                 IsTaskChangingInProgress = false;
             }
             catch (System.FormatException)
             {
-                VKSendMsg(msg.PeerId.Value, SendMsg.BadEntry);
+                VKSendMsg(msg.PeerId.Value, MsgTexts.BadEntry);
             }
             catch (Exception)
             {
-                VKSendMsg(msg.PeerId.Value, SendMsg.ZeroOrVeryBigDate);
+                VKSendMsg(msg.PeerId.Value, MsgTexts.ZeroOrVeryBigDate);
             }
         }
 
@@ -88,10 +85,10 @@ namespace VkBot.Controllers
             {
                 string tasks = "Твои напоминания:\n";
                 foreach (var task in Tasks)
-                    tasks += "\n" + task.Item1 + " " + task.Item2.ToLongDateString() + " " + task.Item2.ToShortTimeString() + "\n";
+                    tasks += "\n" + task.ToString() + "\n";
                 VKSendMsg(msg.PeerId.Value, tasks);
             }
-            else VKSendMsg(msg.PeerId.Value, SendMsg.EmptyTaskList);
+            else VKSendMsg(msg.PeerId.Value, MsgTexts.EmptyTaskList);
 
         }
 
@@ -109,7 +106,7 @@ namespace VkBot.Controllers
         public static void ClearTasks(long PeerId)
         {
             Tasks.Clear();
-            VKSendMsg(PeerId, SendMsg.ClearTasks);
+            VKSendMsg(PeerId, MsgTexts.ClearTasks);
         }
     }
 }

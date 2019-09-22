@@ -10,6 +10,7 @@ using System;
 using VkNet.Enums.Filters;
 using System.Linq;
 using System.Collections.Generic;
+using VkBot.Users;
 
 namespace VkBot.Controllers
 {
@@ -22,8 +23,9 @@ namespace VkBot.Controllers
         /// </summary>
         private readonly IConfiguration configuration;
         private static IVkApi vkApi;
+        private static Tasker tasker;
+        private static AllUsers allUsers = new AllUsers();
 
-        public static Tasker tasker;
 
         public CallbackController(IVkApi _vkApi, IConfiguration configuration)
         {
@@ -47,9 +49,20 @@ namespace VkBot.Controllers
                 case "message_new":
                     {
                         var msg = Message.FromJson(new VkResponse(updates.Object));
-                        MsgReceiver(msg);
+                        if (!allUsers.Users.ContainsKey(msg.Id.Value)) //Добавление нового пользователя.
+                        {
+                            allUsers.Users.Add(msg.Id.Value, new VkUser(msg.Id.Value));
+                            VKSendMsg(msg.PeerId.Value, MsgTexts.HelloNewUser);
+                        }
+                        else
+                            MsgReceiver(msg);
                         break;
                     }
+                    //До лучших времён.
+                    /* case "group_join":
+                        {
+                            break;
+                        } */
             }
             return Ok("ok");
         }
@@ -72,7 +85,7 @@ namespace VkBot.Controllers
             if (mess == "отмена" && Tasker.IsTaskChangingInProgress == true)
             {
                 Tasker.IsTaskChangingInProgress = false;
-                VKSendMsg(msg.PeerId.Value, SendMsg.Cancel);
+                VKSendMsg(msg.PeerId.Value, MsgTexts.Cancel);
                 return;
             }
             if (Tasker.IsTaskChangingInProgress == true)
@@ -107,12 +120,24 @@ namespace VkBot.Controllers
                         VKSendMsg(msg.PeerId.Value, msg.Date.Value.ToString());
                         break;
                     }
+                case "пользователи":
+                    {
+                        if (allUsers.Users.Count > 0)
+                        {
+                            string users = "Пользователи:\n";
+                            foreach (var user in allUsers.Users)
+                                users += user.Value.VkId + "\n";
+                            VKSendMsg(msg.PeerId.Value, users);
+                        }
+                        else VKSendMsg(msg.PeerId.Value, "Пользователей нет.");
+                        break;
+                    }
                 default:
                     {
                         string Answer;
                         try
                         {
-                            Answer = SendMsg.Answers[mess];
+                            Answer = MsgTexts.Answers[mess];
                         }
                         catch (System.Exception)
                         {

@@ -2,7 +2,7 @@
 
 namespace VkBot.Controllers
 {
-    public static class SendMsg
+    public static class MsgTexts
     {
         public readonly static Dictionary<string, string> Answers = new Dictionary<string, string>
         {
@@ -18,5 +18,6 @@ namespace VkBot.Controllers
         public readonly static string ZeroOrVeryBigDate = "Значение полей дд.мм не могут быть равны нулю, значение месяца не может быть больше 12, а дней больше 31.";
         public readonly static string Cancel = "Отменено.";
         public readonly static string DateBeforeError = "Боюсь, что уже слишком поздно, попробуй более позднее время.";
+        public readonly static string HelloNewUser = "Приветсвую тебя, я Напоминатель, ты можешь попросить меня напомнить тебе что-то и я сделаю это в указанное тобой время.)) Напиши \"инструкция\" и я расскажу тебе, как это сделать.))";
     }
 }
