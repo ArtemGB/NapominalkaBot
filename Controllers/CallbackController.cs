@@ -49,9 +49,9 @@ namespace VkBot.Controllers
                 case "message_new":
                     {
                         var msg = Message.FromJson(new VkResponse(updates.Object));
-                        if (!allUsers.Users.ContainsKey(msg.Id.Value)) //Добавление нового пользователя.
+                        if (!allUsers.Users.ContainsKey(msg.UserId.Value)) //Добавление нового пользователя.
                         {
-                            allUsers.Users.Add(msg.Id.Value, new VkUser(msg.Id.Value));
+                            allUsers.Users.Add(msg.Id.Value, new VkUser(msg.UserId.Value));
                             VKSendMsg(msg.PeerId.Value, MsgTexts.HelloNewUser);
                         }
                         else
