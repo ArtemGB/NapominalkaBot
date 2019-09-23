@@ -49,12 +49,12 @@ namespace VkBot.Controllers
                 case "message_new":
                     {
                         var msg = Message.FromJson(new VkResponse(updates.Object));
-                        /* if (!allUsers.Users.ContainsKey(msg.UserId.Value)) //Добавление нового пользователя.
+                        if (!allUsers.Users.ContainsKey(msg.FromId.Value)) //Добавление нового пользователя.
                         {
-                            allUsers.Users.Add(msg.UserId.Value, new VkUser(msg.UserId.Value));
+                            allUsers.Users.Add(msg.FromId.Value, new VkUser(msg.FromId.Value));
                             VKSendMsg(msg.PeerId.Value, MsgTexts.HelloNewUser);
                         }
-                        else */
+                        else
                         MsgReceiver(msg);
                         break;
                     }
@@ -110,17 +110,17 @@ namespace VkBot.Controllers
                         Tasker.ClearTasks(msg.PeerId.Value);
                         break;
                     }
-                case "время":
+                case "время"://Для тестов.
                     {
                         VKSendMsg(msg.PeerId.Value, DateTime.Now.AddHours(3).ToLocalTime().ToString());
                         break;
                     }
-                case "время сообщения":
+                case "время сообщения"://Для тестов.
                     {
                         VKSendMsg(msg.PeerId.Value, msg.Date.Value.ToString());
                         break;
                     }
-                case "пользователи":
+                case "пользователи"://Для тестов.а
                     {
                         if (allUsers.Users.Count > 0)
                         {
