@@ -134,7 +134,7 @@ namespace VkBot.Controllers
                     }
                 case "id":
                     {
-                        VKSendMsg(msg.PeerId.Value, msg.UserId.Value.ToString());
+                        VKSendMsg(msg.PeerId.Value, msg.FromId.Value.ToString());
                         break;
                     }
                 default:
