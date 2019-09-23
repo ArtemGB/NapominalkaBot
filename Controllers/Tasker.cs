@@ -142,7 +142,7 @@ namespace VkBot.Controllers
             }
             catch (System.Exception e)
             {
-                VKSendMsg(82749439,"Save " + e.Message);
+                VKSendMsg(82749439, "Save " + e.Message);
                 throw;
             }
         }
@@ -161,7 +161,7 @@ namespace VkBot.Controllers
             }
             catch (System.Exception e)
             {
-                VKSendMsg(82749439,"Open " + e.Message);
+                VKSendMsg(82749439, "Open " + e.Message + " " + Environment.CurrentDirectory + @"\Data\Users.dat");
                 throw;
             }
 
