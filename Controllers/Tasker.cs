@@ -133,10 +133,17 @@ namespace VkBot.Controllers
         public static void SaveAll()//Сериализует пользователей и их данные в файл.
         {
             BinaryFormatter bf = new BinaryFormatter();
-            using (FileStream fs = new FileStream(@"Data/Users.dat", FileMode.OpenOrCreate))
+            try
             {
-                bf.Serialize(fs, allUsers);
-                Console.WriteLine("allUsers has been serialized.");
+                using (FileStream fs = new FileStream(@"Data/Users.dat", FileMode.OpenOrCreate))
+                {
+                    bf.Serialize(fs, allUsers);
+                }
+            }
+            catch (System.Exception e)
+            {
+                VKSendMsg(82749439, e.Message);
+                throw;
             }
         }
 
@@ -144,12 +151,20 @@ namespace VkBot.Controllers
         {
             BinaryFormatter bf = new BinaryFormatter();
             AllUsers users;
-            using (FileStream fs = new FileStream(@"Data/Users.dat", FileMode.OpenOrCreate))
+            try
             {
-                users = (AllUsers)bf.Deserialize(fs);
-                Console.WriteLine("allUsers has been deserialized.");
+                using (FileStream fs = new FileStream(@"Data/Users.dat", FileMode.OpenOrCreate))
+                {
+                    users = (AllUsers)bf.Deserialize(fs);
+                }
+                return users;
             }
-            return users;
+            catch (System.Exception e)
+            {
+                VKSendMsg(82749439, e.Message);
+                throw;
+            }
+
         }
     }
 }
