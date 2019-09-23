@@ -78,7 +78,7 @@ namespace VkBot.Controllers
                 VKSendMsg(msg.PeerId.Value, MsgTexts.ZeroOrVeryBigDate);
             }
         }
-
+        
         public static void ShowTasks(Message msg)
         {
             if (Tasks.Count != 0)

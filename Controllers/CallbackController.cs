@@ -55,7 +55,7 @@ namespace VkBot.Controllers
                             VKSendMsg(msg.PeerId.Value, MsgTexts.HelloNewUser);
                         }
                         else
-                        MsgReceiver(msg);
+                            MsgReceiver(msg);
                         break;
                     }
                     //До лучших времён.
