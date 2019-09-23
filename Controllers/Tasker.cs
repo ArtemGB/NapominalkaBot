@@ -25,15 +25,15 @@ namespace VkBot.Controllers
         public static TaskDelegat TaskProcces; //Переключатель методогв выполнения операций с напоминаниями.
         //public static List<UserTask> Tasks = new List<UserTask>();//Удалить потом.
 
-        private static TimerCallback Save;//Делегат на метод сериализации.
-        private static Timer Saver;//Таймер, сохраняющий данные пользователей.
+        //private static TimerCallback Save;//Делегат на метод сериализации.
+        //private static Timer Saver;//Таймер, сохраняющий данные пользователей.
 
         public Tasker(IVkApi _vkApi)
         {
-            Save = new TimerCallback(SaveAll);
-            Saver = new Timer(SaveAll, 0, 0, 30000);
+            /*  Save = new TimerCallback(SaveAll);
+             Saver = new Timer(SaveAll, 0, 0, 30000); */
             vkApi = _vkApi;
-            OpenAll();
+            allUsers = OpenAll();
         }
 
         public static void StartTaskAdding(Message msg)//Начинает процесс сохранения напоминания.
@@ -78,8 +78,7 @@ namespace VkBot.Controllers
                     }
                 }
                 allUsers.Users[msg.FromId.Value].Tasks[allUsers.Users[msg.FromId.Value].Tasks.Count - 1].TaskDate = TaskTime;
-                VKSendMsg(msg.PeerId.Value, "Напоминание добавлено.");
-                IsTaskChangingInProgress = false;
+                AddTaskComplete(msg);//Сообщаем о успешном завершении добавления напоминания.
             }
             catch (System.FormatException)
             {
@@ -91,7 +90,13 @@ namespace VkBot.Controllers
             }
         }
 
-        //Сделать вывод под конкретного пользователя!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        public static void AddTaskComplete(Message msg)
+        {
+            VKSendMsg(msg.PeerId.Value, "Напоминание добавлено.");
+            SaveAll();
+            IsTaskChangingInProgress = false;//Выставляем флаг в 0.
+        }
+
         public static void ShowTasks(Message msg)//Показывает все напоминания для текущего пользователя.
         {
             if (allUsers.Users[msg.FromId.Value].Tasks.Count != 0)
@@ -117,15 +122,15 @@ namespace VkBot.Controllers
             return new OkObjectResult("ok");
         }
 
-        //Сделать под конкретного пользователя!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //Сделать запрос на подтверждение.
         public static void ClearTasks(long FromId)//Очищает список напоминаний.
         {
             allUsers.Users[FromId].Tasks.Clear();
             VKSendMsg(FromId, MsgTexts.ClearTasks);
+            SaveAll();
         }
 
-        public static void SaveAll(object obj)//Сериализует пользователей и их данные в файл.
+        public static void SaveAll()//Сериализует пользователей и их данные в файл.
         {
             BinaryFormatter bf = new BinaryFormatter();
             using (FileStream fs = new FileStream(@"Data/Users.dat", FileMode.OpenOrCreate))
@@ -135,14 +140,16 @@ namespace VkBot.Controllers
             }
         }
 
-        public static void OpenAll()//Дусериализует данные пользователей.
+        public static AllUsers OpenAll()//Десериализует данные пользователей.
         {
-            BinaryFormatter bf = new BinaryFormatter(); 
-            using(FileStream fs = new FileStream(@"Data/Users.dat", FileMode.OpenOrCreate))
+            BinaryFormatter bf = new BinaryFormatter();
+            AllUsers users;
+            using (FileStream fs = new FileStream(@"Data/Users.dat", FileMode.OpenOrCreate))
             {
-                allUsers = (AllUsers)bf.Deserialize(fs);
+                users = (AllUsers)bf.Deserialize(fs);
                 Console.WriteLine("allUsers has been deserialized.");
             }
+            return users;
         }
     }
 }
