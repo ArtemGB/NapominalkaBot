@@ -4,6 +4,7 @@ using System;
 
 namespace VkBot.Users
 {
+    [Serializable]
     public class VkUser
     {
         public long VkId { get; private set; }

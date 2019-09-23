@@ -24,7 +24,7 @@ namespace VkBot.Controllers
         private readonly IConfiguration configuration;
         private static IVkApi vkApi;
         private static Tasker tasker;
-        private static AllUsers allUsers = new AllUsers();
+        //private static AllUsers allUsers = new AllUsers();
 
 
         public CallbackController(IVkApi _vkApi, IConfiguration configuration)
@@ -49,9 +49,9 @@ namespace VkBot.Controllers
                 case "message_new":
                     {
                         var msg = Message.FromJson(new VkResponse(updates.Object));
-                        if (!allUsers.Users.ContainsKey(msg.FromId.Value)) //Добавление нового пользователя.
+                        if (!Tasker.allUsers.Users.ContainsKey(msg.FromId.Value)) //Добавление нового пользователя.
                         {
-                            allUsers.Users.Add(msg.FromId.Value, new VkUser(msg.FromId.Value));
+                            Tasker.allUsers.Users.Add(msg.FromId.Value, new VkUser(msg.FromId.Value));
                             VKSendMsg(msg.PeerId.Value, MsgTexts.HelloNewUser);
                         }
                         else
@@ -107,7 +107,7 @@ namespace VkBot.Controllers
                     }
                 case "очистить":
                     {
-                        Tasker.ClearTasks(msg.PeerId.Value);
+                        Tasker.ClearTasks(msg.FromId.Value);
                         break;
                     }
                 case "время"://Для тестов.
@@ -122,10 +122,10 @@ namespace VkBot.Controllers
                     }
                 case "пользователи"://Для тестов.а
                     {
-                        if (allUsers.Users.Count > 0)
+                        if (Tasker.allUsers.Users.Count > 0)
                         {
                             string users = "Пользователи:\n";
-                            foreach (var user in allUsers.Users)
+                            foreach (var user in Tasker.allUsers.Users)
                                 users += user.Value.VkId + "\n";
                             VKSendMsg(msg.PeerId.Value, users);
                         }

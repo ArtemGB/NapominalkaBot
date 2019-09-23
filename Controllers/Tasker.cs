@@ -1,3 +1,5 @@
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 using System.Threading.Tasks;
 using System;
 using Microsoft.AspNetCore.Mvc;
@@ -6,45 +8,55 @@ using VkNet.Model.RequestParams;
 using VkNet.Abstractions;
 using System.Collections.Generic;
 using VkBot.Users;
+using System.Threading;
 
 namespace VkBot.Controllers
 {
+    ///<summary>
+    ///Работа с напоминаниями пользователей.
+    ///</summary>
     public class Tasker : Controller
     {
-        ///<summary>
-        ///Работа с задачами пользователей.
-        ///</summary>
         private static IVkApi vkApi;
-        public List<User> Users;
+        public static AllUsers allUsers = new AllUsers(); //Хранит все данные пользователей.
 
-        public Tasker(IVkApi _vkApi) => vkApi = _vkApi;
-
-        public static bool IsTaskChangingInProgress;
+        public static bool IsTaskChangingInProgress;//Показывает, выполняется ли сейчас какая-либо операция.
         public delegate void TaskDelegat(Message msg);
         public static TaskDelegat TaskProcces; //Переключатель методогв выполнения операций с напоминаниями.
-        public static List<UserTask> Tasks = new List<UserTask>();//Удалить потом.
-        public static void StartTaskAdding(Message msg)
+        //public static List<UserTask> Tasks = new List<UserTask>();//Удалить потом.
+
+        private static TimerCallback Save;//Делегат на метод сериализации.
+        private static Timer Saver;//Таймер, сохраняющий данные пользователей.
+
+        public Tasker(IVkApi _vkApi)
+        {
+            Save = new TimerCallback(SaveAll);
+            Saver = new Timer(SaveAll, 0, 0, 30000);
+            vkApi = _vkApi;
+            OpenAll();
+        }
+
+        public static void StartTaskAdding(Message msg)//Начинает процесс сохранения напоминания.
         {
             IsTaskChangingInProgress = true;
             VKSendMsg(msg.PeerId.Value, MsgTexts.TaskAddingFistInstruction);
             TaskProcces = AddTaskText;
         }
 
-        public static void AddTaskText(Message msg)
+        public static void AddTaskText(Message msg)//Сохраняет текст напоминания.
         {
-            Tasks.Add(new UserTask(msg.Text, DateTime.Now));
+            allUsers.Users[msg.FromId.Value].Tasks.Add(new UserTask(msg.Text, DateTime.Now));
             VKSendMsg(msg.PeerId.Value, MsgTexts.TaskDateAddingInstruction);
             TaskProcces = AddTaskDate;
         }
 
-        public static void AddTaskDate(Message msg)
+        public static void AddTaskDate(Message msg)//Добавление даты напоминания.
         {
             try
             {
-                string[] DateAndTime = msg.Text.Split(' ');
-                string DateMMDD = DateAndTime[DateAndTime.Length - 2], TimeHHMM = DateAndTime[DateAndTime.Length - 1];
-                string[] Date = DateMMDD.Split(',', '.');
-                string[] Time = TimeHHMM.Split(':');
+                string[] DateAndTime = msg.Text.Split(' ');//Делим строку с временем на две части: "дд.мм" и "чч:мм".
+                string[] Date = DateAndTime[DateAndTime.Length - 2].Split(',', '.');//Разделяем дату на месяцы и дни.
+                string[] Time = DateAndTime[DateAndTime.Length - 1].Split(':');//Разделяем время на часы и минуты.
                 DateTime TaskTime = new DateTime();
                 DateAndTime[0] = DateAndTime[0].ToLower();
                 if (DateAndTime[0] == "через")
@@ -65,7 +77,7 @@ namespace VkBot.Controllers
                         return;
                     }
                 }
-                Tasks[Tasks.Count - 1].TaskDate = TaskTime;
+                allUsers.Users[msg.FromId.Value].Tasks[allUsers.Users[msg.FromId.Value].Tasks.Count - 1].TaskDate = TaskTime;
                 VKSendMsg(msg.PeerId.Value, "Напоминание добавлено.");
                 IsTaskChangingInProgress = false;
             }
@@ -78,13 +90,14 @@ namespace VkBot.Controllers
                 VKSendMsg(msg.PeerId.Value, MsgTexts.ZeroOrVeryBigDate);
             }
         }
-        
-        public static void ShowTasks(Message msg)
+
+        //Сделать вывод под конкретного пользователя!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        public static void ShowTasks(Message msg)//Показывает все напоминания для текущего пользователя.
         {
-            if (Tasks.Count != 0)
+            if (allUsers.Users[msg.FromId.Value].Tasks.Count != 0)
             {
                 string tasks = "Твои напоминания:\n";
-                foreach (var task in Tasks)
+                foreach (var task in allUsers.Users[msg.FromId.Value].Tasks)
                     tasks += "\n" + task.ToString() + "\n";
                 VKSendMsg(msg.PeerId.Value, tasks);
             }
@@ -92,6 +105,7 @@ namespace VkBot.Controllers
 
         }
 
+        //Отправляет сообщение пользователю.
         public static IActionResult VKSendMsg(long _PeerId, string MsgText)
         {
             vkApi.Messages.Send(new MessagesSendParams
@@ -103,10 +117,32 @@ namespace VkBot.Controllers
             return new OkObjectResult("ok");
         }
 
-        public static void ClearTasks(long PeerId)
+        //Сделать под конкретного пользователя!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //Сделать запрос на подтверждение.
+        public static void ClearTasks(long FromId)//Очищает список напоминаний.
         {
-            Tasks.Clear();
-            VKSendMsg(PeerId, MsgTexts.ClearTasks);
+            allUsers.Users[FromId].Tasks.Clear();
+            VKSendMsg(FromId, MsgTexts.ClearTasks);
+        }
+
+        public static void SaveAll(object obj)//Сериализует пользователей и их данные в файл.
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            using (FileStream fs = new FileStream(@"Data/Users.dat", FileMode.OpenOrCreate))
+            {
+                bf.Serialize(fs, allUsers);
+                Console.WriteLine("allUsers has been serialized.");
+            }
+        }
+
+        public static void OpenAll()//Дусериализует данные пользователей.
+        {
+            BinaryFormatter bf = new BinaryFormatter(); 
+            using(FileStream fs = new FileStream(@"Data/Users.dat", FileMode.OpenOrCreate))
+            {
+                allUsers = (AllUsers)bf.Deserialize(fs);
+                Console.WriteLine("allUsers has been deserialized.");
+            }
         }
     }
 }
