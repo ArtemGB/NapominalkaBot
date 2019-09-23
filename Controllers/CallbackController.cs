@@ -132,7 +132,7 @@ namespace VkBot.Controllers
                         else VKSendMsg(msg.PeerId.Value, "Пользователей нет.");
                         break;
                     }
-                case "Id":
+                case "id":
                     {
                         VKSendMsg(msg.PeerId.Value, msg.UserId.Value.ToString());
                         break;
