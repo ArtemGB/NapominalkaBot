@@ -135,7 +135,7 @@ namespace VkBot.Controllers
             BinaryFormatter bf = new BinaryFormatter();
             try
             {
-                using (FileStream fs = new FileStream(@"Data/Users.dat", FileMode.OpenOrCreate))
+                using (FileStream fs = new FileStream(@Environment.CurrentDirectory + @"\Data\Users.dat", FileMode.OpenOrCreate))
                 {
                     bf.Serialize(fs, allUsers);
                 }
@@ -153,7 +153,7 @@ namespace VkBot.Controllers
             AllUsers users;
             try
             {
-                using (FileStream fs = new FileStream(@"Data/Users.dat", FileMode.OpenOrCreate))
+                using (FileStream fs = new FileStream(@Environment.CurrentDirectory + @"\Data\Users.dat", FileMode.OpenOrCreate))
                 {
                     users = (AllUsers)bf.Deserialize(fs);
                 }
