@@ -49,13 +49,13 @@ namespace VkBot.Controllers
                 case "message_new":
                     {
                         var msg = Message.FromJson(new VkResponse(updates.Object));
-                        if (!allUsers.Users.ContainsKey(msg.UserId.Value)) //Добавление нового пользователя.
+                        /* if (!allUsers.Users.ContainsKey(msg.UserId.Value)) //Добавление нового пользователя.
                         {
                             allUsers.Users.Add(msg.UserId.Value, new VkUser(msg.UserId.Value));
                             VKSendMsg(msg.PeerId.Value, MsgTexts.HelloNewUser);
                         }
-                        else
-                            MsgReceiver(msg);
+                        else */
+                        MsgReceiver(msg);
                         break;
                     }
                     //До лучших времён.
@@ -130,6 +130,11 @@ namespace VkBot.Controllers
                             VKSendMsg(msg.PeerId.Value, users);
                         }
                         else VKSendMsg(msg.PeerId.Value, "Пользователей нет.");
+                        break;
+                    }
+                case "Id":
+                    {
+                        VKSendMsg(msg.PeerId.Value, msg.UserId.Value.ToString());
                         break;
                     }
                 default:
