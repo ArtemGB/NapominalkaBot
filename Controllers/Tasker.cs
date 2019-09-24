@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Threading.Tasks;
@@ -135,7 +136,7 @@ namespace VkBot.Controllers
             BinaryFormatter bf = new BinaryFormatter();
             try
             {
-                using (FileStream fs = new FileStream(@"/app/heroku_output/Users.dat", FileMode.OpenOrCreate))
+                using (FileStream fs = new FileStream(@Environment.CurrentDirectory + @"/Data/Users.dat", FileMode.OpenOrCreate))
                 {
                     bf.Serialize(fs, allUsers);
                 }
@@ -153,7 +154,7 @@ namespace VkBot.Controllers
             AllUsers users;
             try
             {
-                using (FileStream fs = new FileStream(@"/app/heroku_output/Users.dat", FileMode.OpenOrCreate))
+                using (FileStream fs = new FileStream(@Environment.CurrentDirectory + @"/Data/Users.dat", FileMode.OpenOrCreate))
                 {
                     users = (AllUsers)bf.Deserialize(fs);
                 }
@@ -164,8 +165,8 @@ namespace VkBot.Controllers
                 /* string dir = "";
                 string[] drr = Directory.GetDirectories(Environment.CurrentDirectory);
                 foreach (var dr in drr)
-                    dir += dr + "\n";
-                VKSendMsg(82749439, "Open " + e.Message + "\n" + dir); */
+                    dir += dr + "\n";*/
+                VKSendMsg(82749439, "Open " + e.Message + "\n" + Assembly.GetExecutingAssembly().Location);
                 throw;
             }
 
