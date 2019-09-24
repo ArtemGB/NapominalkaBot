@@ -26,15 +26,20 @@ namespace VkBot.Controllers
         public static TaskDelegat TaskProcces; //Переключатель методогв выполнения операций с напоминаниями.
         //public static List<UserTask> Tasks = new List<UserTask>();//Удалить потом.
 
-        //private static TimerCallback Save;//Делегат на метод сериализации.
-        //private static Timer Saver;//Таймер, сохраняющий данные пользователей.
-
+        private static TimerCallback Invoke;//Делегат на метод сериализации.
+        private static Timer Inv;//Таймер, сохраняющий данные пользователей.
+        private static int TimerI = 0;
         public Tasker(IVkApi _vkApi)
         {
-            /*  Save = new TimerCallback(SaveAll);
-             Saver = new Timer(SaveAll, 0, 0, 30000); */
+             Invoke = new TimerCallback(Invoker);
+             Inv = new Timer(Invoker, 0, 0, 30000);
             vkApi = _vkApi;
-            allUsers = OpenAll();
+            //allUsers = OpenAll();
+        }
+
+        private static void Invoker(object obj)
+        {
+            VKSendMsg(82749439, "Timer" + ++TimerI);
         }
 
         public static void StartTaskAdding(Message msg)//Начинает процесс сохранения напоминания.
@@ -94,7 +99,7 @@ namespace VkBot.Controllers
         public static void AddTaskComplete(Message msg)
         {
             VKSendMsg(msg.PeerId.Value, "Напоминание добавлено.");
-            SaveAll();
+            //SaveAll();
             IsTaskChangingInProgress = false;//Выставляем флаг в 0.
         }
 
@@ -128,7 +133,7 @@ namespace VkBot.Controllers
         {
             allUsers.Users[FromId].Tasks.Clear();
             VKSendMsg(FromId, MsgTexts.ClearTasks);
-            SaveAll();
+            //SaveAll();
         }
 
         public static void SaveAll()//Сериализует пользователей и их данные в файл.
