@@ -161,7 +161,7 @@ namespace VkBot.Controllers
             }
             catch (System.Exception e)
             {
-                string dir;
+                string dir = "";
                 foreach (var dr in Directory.GetDirectories(Environment.CurrentDirectory))
                 {
                     dir += dr + "\n";
