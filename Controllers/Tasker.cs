@@ -32,14 +32,15 @@ namespace VkBot.Controllers
         public Tasker(IVkApi _vkApi)
         {
              Invoke = new TimerCallback(Invoker);
-             Inv = new Timer(Invoker, 0, 0, 10000000);
+             Inv = new Timer(Invoker, 0, 0, 100000);
             vkApi = _vkApi;
             //allUsers = OpenAll();
         }
 
         private static void Invoker(object obj)
         {
-            VKSendMsg(82749439, "Timer" + ++TimerI);
+            //VKSendMsg(82749439, "Timer" + ++TimerI);
+            Console.WriteLine("Timer " + ++TimerI);
         }
 
         public static void StartTaskAdding(Message msg)//Начинает процесс сохранения напоминания.
