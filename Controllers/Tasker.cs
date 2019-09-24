@@ -32,7 +32,7 @@ namespace VkBot.Controllers
         public Tasker(IVkApi _vkApi)
         {
              Invoke = new TimerCallback(Invoker);
-             Inv = new Timer(Invoker, 0, 0, 30000);
+             Inv = new Timer(Invoker, 0, 0, 10000000);
             vkApi = _vkApi;
             //allUsers = OpenAll();
         }
