@@ -24,22 +24,27 @@ namespace VkBot.Controllers
         public static bool IsTaskChangingInProgress;//Показывает, выполняется ли сейчас какая-либо операция.
         public delegate void TaskDelegat(Message msg);
         public static TaskDelegat TaskProcces; //Переключатель методогв выполнения операций с напоминаниями.
-        //public static List<UserTask> Tasks = new List<UserTask>();//Удалить потом.
 
         private static TimerCallback Invoke;//Делегат на метод сериализации.
         private static Timer Inv;//Таймер, сохраняющий данные пользователей.
         private static int TimerI = 0;
         public Tasker(IVkApi _vkApi)
         {
-             Invoke = new TimerCallback(Invoker);
-             Inv = new Timer(Invoker, 0, 0, 100000);
+            Invoke = new TimerCallback(Reminder);
+            Inv = new Timer(Reminder, 0, 0, 100000);
             vkApi = _vkApi;
-            //allUsers = OpenAll();
         }
 
-        private static void Invoker(object obj)
+        private static void Reminder(object obj)
         {
-            //VKSendMsg(82749439, "Timer" + ++TimerI);
+            DateTime UtcNow = DateTime.UtcNow.AddHours(3);
+            foreach (var usr in allUsers.Users)
+            {
+                foreach (var tsk in usr.Value.Tasks)
+                {
+                    //if(UtcNow.Subtract(tsk.TaskDate).Days == UtcNow.Day)
+                }
+            }
             Console.WriteLine("Timer " + ++TimerI);
         }
 
@@ -140,17 +145,9 @@ namespace VkBot.Controllers
         public static void SaveAll()//Сериализует пользователей и их данные в файл.
         {
             BinaryFormatter bf = new BinaryFormatter();
-            try
+            using (FileStream fs = new FileStream(@Environment.CurrentDirectory + @"/Data/Users.dat", FileMode.OpenOrCreate))
             {
-                using (FileStream fs = new FileStream(@Environment.CurrentDirectory + @"/Data/Users.dat", FileMode.OpenOrCreate))
-                {
-                    bf.Serialize(fs, allUsers);
-                }
-            }
-            catch (System.Exception e)
-            {
-                VKSendMsg(82749439, "Save " + e.Message);
-                throw;
+                bf.Serialize(fs, allUsers);
             }
         }
 
@@ -158,24 +155,11 @@ namespace VkBot.Controllers
         {
             BinaryFormatter bf = new BinaryFormatter();
             AllUsers users;
-            try
+            using (FileStream fs = new FileStream(@Environment.CurrentDirectory + @"/Data/Users.dat", FileMode.OpenOrCreate))
             {
-                using (FileStream fs = new FileStream(@Environment.CurrentDirectory + @"/Data/Users.dat", FileMode.OpenOrCreate))
-                {
-                    users = (AllUsers)bf.Deserialize(fs);
-                }
-                return users;
+                users = (AllUsers)bf.Deserialize(fs);
             }
-            catch (System.Exception e)
-            {
-                /* string dir = "";
-                string[] drr = Directory.GetDirectories(Environment.CurrentDirectory);
-                foreach (var dr in drr)
-                    dir += dr + "\n";*/
-                VKSendMsg(82749439, "Open " + e.Message + "\n" + Assembly.GetExecutingAssembly().Location);
-                throw;
-            }
-
+            return users;
         }
     }
 }
