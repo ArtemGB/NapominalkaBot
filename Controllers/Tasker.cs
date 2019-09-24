@@ -162,11 +162,10 @@ namespace VkBot.Controllers
             catch (System.Exception e)
             {
                 string dir = "";
-                foreach (var dr in Directory.GetDirectories(Environment.CurrentDirectory))
-                {
+                string[] drr = Directory.GetDirectories(Environment.CurrentDirectory);
+                foreach (var dr in drr)
                     dir += dr + "\n";
-                }
-                VKSendMsg(82749439, "Open " + e.Message + " " + Environment.CurrentDirectory + @"\Data\Users.dat" + "\n" + dir);
+                VKSendMsg(82749439, "Open " + e.Message + "\n" + dir);
                 throw;
             }
 
