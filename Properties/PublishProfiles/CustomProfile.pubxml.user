@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Этот файл используется процессом публикации или упаковки вашего веб-проекта. Можно настроить поведение этого процесса,
+изменив этот файл MSBuild. Подробности см. на странице https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAASz5hAkX8r0GvZQOVjhNcnAAAAAACAAAAAAAQZgAAAAEAACAAAADvJOcqdN4BKyBZrxtZpu7J6Y4RG0lN7ipY7+6iaGo4+gAAAAAOgAAAAAIAACAAAACtx9utB3dqaXtWtqVz0K+T6vHcEwBobFlDH2Zo+LTgCSAAAAAyadjRZM6/oRhPzfUg/MlmEv2R7VHsD+xKBWFaAZrx/0AAAABOPJC/mHgNnudJDjyhlJoc9nwUTwzEKUL1wvhEf9LThuNaShpflUBmpyT4kLJLHKoNA/tjwZpuQEu8tGSNepqk</EncryptedPassword>
+    <_PublishTargetUrl>ftp://u0818396.plsk.regruhosting.ru/httpdocs</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="appsettings.Development.json">
+      <publishTime>09/26/2019 18:54:52</publishTime>
+    </File>
+    <File Include="appsettings.json">
+      <publishTime>09/26/2019 18:54:52</publishTime>
+    </File>
+    <File Include="AWSSDK.Core.dll">
+      <publishTime>09/23/2019 12:16:54</publishTime>
+    </File>
+    <File Include="Flurl.dll">
+      <publishTime>04/28/2019 16:33:26</publishTime>
+    </File>
+    <File Include="Flurl.Http.dll">
+      <publishTime>04/28/2019 17:14:30</publishTime>
+    </File>
+    <File Include="HtmlAgilityPack.dll">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="MSharp.Framework.dll">
+      <publishTime>09/13/2019 09:24:02</publishTime>
+    </File>
+    <File Include="Newtonsoft.Json.dll">
+      <publishTime>04/22/2019 01:06:16</publishTime>
+    </File>
+    <File Include="runtimes/win/lib/netcoreapp2.0/System.Text.Encoding.CodePages.dll">
+      <publishTime>11/29/2018 15:39:20</publishTime>
+    </File>
+    <File Include="System.Runtime.CompilerServices.Unsafe.dll">
+      <publishTime>09/18/2018 19:38:10</publishTime>
+    </File>
+    <File Include="System.Text.Encoding.CodePages.dll">
+      <publishTime>11/29/2018 15:39:20</publishTime>
+    </File>
+    <File Include="System.Xml.XPath.XmlDocument.dll">
+      <publishTime>05/11/2016 04:57:34</publishTime>
+    </File>
+    <File Include="VkBot.deps.json">
+      <publishTime>09/29/2019 02:30:19</publishTime>
+    </File>
+    <File Include="VkBot.dll">
+      <publishTime>09/29/2019 02:30:18</publishTime>
+    </File>
+    <File Include="VkBot.pdb">
+      <publishTime>09/29/2019 02:30:18</publishTime>
+    </File>
+    <File Include="VkBot.runtimeconfig.json">
+      <publishTime>09/29/2019 02:30:19</publishTime>
+    </File>
+    <File Include="VkNet.dll">
+      <publishTime>09/03/2019 14:12:32</publishTime>
+    </File>
+    <File Include="web.config">
+      <publishTime>09/29/2019 02:30:19</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

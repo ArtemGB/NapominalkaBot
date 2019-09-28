@@ -24,9 +24,10 @@
     ".NETCoreApp,Version=v2.2": {
       "VkBot/1.0.0": {
         "dependencies": {
-          "AWSSDK.Core": "3.3.103.43",
+          "MSharp.Framework": "4.0.104",
           "Microsoft.AspNetCore.App": "2.2.0",
           "Microsoft.AspNetCore.Razor.Design": "2.2.0",
+          "Microsoft.AspNetCore.Server.Kestrel": "2.2.0",
           "Microsoft.NETCore.App": "2.2.0",
           "VkNet": "1.44.0"
         },
@@ -35,17 +36,6 @@
         },
         "compile": {
           "VkBot.dll": {}
-        }
-      },
-      "AWSSDK.Core/3.3.103.43": {
-        "runtime": {
-          "lib/netstandard2.0/AWSSDK.Core.dll": {
-            "assemblyVersion": "3.3.0.0",
-            "fileVersion": "3.3.103.43"
-          }
-        },
-        "compile": {
-          "lib/netstandard2.0/AWSSDK.Core.dll": {}
         }
       },
       "Flurl/2.8.1": {
@@ -90,6 +80,17 @@
         },
         "compile": {
           "lib/netstandard2.0/HtmlAgilityPack.dll": {}
+        }
+      },
+      "MSharp.Framework/4.0.104": {
+        "runtime": {
+          "lib/net45/MSharp.Framework.dll": {
+            "assemblyVersion": "2.1.1.0",
+            "fileVersion": "2.1.1.0"
+          }
+        },
+        "compile": {
+          "lib/net45/MSharp.Framework.dll": {}
         }
       },
       "System.Net.Http/4.3.2": {
@@ -3336,13 +3337,6 @@
       "serviceable": false,
       "sha512": ""
     },
-    "AWSSDK.Core/3.3.103.43": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-sVRL7bs68fNHPvs0t+ZAdff2X9HnJH/wgL1onDYAQUrETG1dtrnq6G1QIR3pWoeMneGQVFUqU1mACiHMDJLvfQ==",
-      "path": "awssdk.core/3.3.103.43",
-      "hashPath": "awssdk.core.3.3.103.43.nupkg.sha512"
-    },
     "Flurl/2.8.1": {
       "type": "package",
       "serviceable": true,
@@ -3363,6 +3357,13 @@
       "sha512": "sha512-V+M1IO59xDQ7BmSE9Sz+rOYNrEdW8pC5p0Y9BVgxLqrAjxVZA4uRyQmw6zhw9HfCgdOKIsMjkZf4J+rx8VmXZw==",
       "path": "htmlagilitypack/1.11.0",
       "hashPath": "htmlagilitypack.1.11.0.nupkg.sha512"
+    },
+    "MSharp.Framework/4.0.104": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-wCeDYKOqLTorLN3TT8ivYH7hznwR4bCdLu1CHRFsZ0IkJPfYOr41OIHBKO+eLZXLeDB+8DTS4vCnvmBxeTZANw==",
+      "path": "msharp.framework/4.0.104",
+      "hashPath": "msharp.framework.4.0.104.nupkg.sha512"
     },
     "System.Net.Http/4.3.2": {
       "type": "package",

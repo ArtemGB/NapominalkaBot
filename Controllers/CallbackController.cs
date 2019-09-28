@@ -11,6 +11,7 @@ using VkNet.Enums.Filters;
 using System.Linq;
 using System.Collections.Generic;
 using VkBot.Users;
+using VkBot.Strings;
 
 namespace VkBot.Controllers
 {
@@ -34,6 +35,12 @@ namespace VkBot.Controllers
             tasker = new Tasker(vkApi);
             Tasker.allUsers = Tasker.OpenAll();
             Console.WriteLine("Constructor CallbackComtroller");
+        }
+
+        ~CallbackController()
+        {
+            Tasker.SaveAll();
+            Console.WriteLine("Destructor.");
         }
 
         [HttpPost]
@@ -85,13 +92,14 @@ namespace VkBot.Controllers
         {
             string mess = msg.Text.ToLower(); //Переводим всё в нижний регистр.
             mess = mess.Replace(".", "").Replace(",", "").Replace(")", "").Replace("(", "").Replace("?", ""); //Убираем лишние символы.
-            if (mess == "отмена" && Tasker.IsTaskChangingInProgress == true)
+            if (mess == "отмена" && Tasker.allUsers.Users[msg.FromId.Value].IsTaskChangingInProgress == true)
             {
-                Tasker.IsTaskChangingInProgress = false;
+                Tasker.allUsers.Users[msg.FromId.Value].IsTaskChangingInProgress = false;
+                Tasker.SaveAll();
                 VKSendMsg(msg.PeerId.Value, MsgTexts.Cancel);
                 return;
             }
-            if (Tasker.IsTaskChangingInProgress == true)
+            if (Tasker.allUsers.Users[msg.FromId.Value].IsTaskChangingInProgress == true)
             {
                 Tasker.TaskProcces(msg);
                 return;
@@ -149,7 +157,7 @@ namespace VkBot.Controllers
                         }
                         catch (System.Exception)
                         {
-                            Answer = "Чёт я тебя не понял.( Напиши слово \"Инструкция\" и я скажу, что умею.";
+                            Answer = MsgTexts.DontUnderstand;
                         }
                         VKSendMsg(msg.PeerId.Value, Answer);
                         break;

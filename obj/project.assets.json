@@ -2,16 +2,7 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.2": {
-      "AWSSDK.Core/3.3.103.43": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/AWSSDK.Core.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/AWSSDK.Core.dll": {}
-        }
-      },
-      "Flurl/2.8.1": {
+      "Flurl/2.8.2": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Flurl.dll": {}
@@ -20,12 +11,12 @@
           "lib/netstandard2.0/Flurl.dll": {}
         }
       },
-      "Flurl.Http/2.4.1": {
+      "Flurl.Http/2.4.2": {
         "type": "package",
         "dependencies": {
-          "Flurl": "2.8.1",
-          "Newtonsoft.Json": "11.0.2",
-          "System.Text.Encoding.CodePages": "4.4.0"
+          "Flurl": "2.8.2",
+          "Newtonsoft.Json": "12.0.2",
+          "System.Text.Encoding.CodePages": "4.5.1"
         },
         "compile": {
           "lib/netstandard2.0/Flurl.Http.dll": {}
@@ -34,7 +25,7 @@
           "lib/netstandard2.0/Flurl.Http.dll": {}
         }
       },
-      "HtmlAgilityPack/1.11.0": {
+      "HtmlAgilityPack/1.11.12": {
         "type": "package",
         "dependencies": {
           "System.Net.Http": "4.3.2",
@@ -2771,7 +2762,7 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
-      "Newtonsoft.Json/11.0.2": {
+      "Newtonsoft.Json/12.0.2": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
@@ -3763,7 +3754,7 @@
           "ref/netstandard1.5/System.Runtime.dll": {}
         }
       },
-      "System.Runtime.CompilerServices.Unsafe/4.5.1": {
+      "System.Runtime.CompilerServices.Unsafe/4.5.2": {
         "type": "package",
         "compile": {
           "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll": {}
@@ -4209,14 +4200,14 @@
           "ref/netstandard1.3/System.Text.Encoding.dll": {}
         }
       },
-      "System.Text.Encoding.CodePages/4.5.0": {
+      "System.Text.Encoding.CodePages/4.5.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.0.0",
-          "System.Runtime.CompilerServices.Unsafe": "4.5.0"
+          "Microsoft.NETCore.Platforms": "2.1.2",
+          "System.Runtime.CompilerServices.Unsafe": "4.5.2"
         },
         "compile": {
-          "ref/netstandard2.0/System.Text.Encoding.CodePages.dll": {}
+          "lib/netstandard2.0/System.Text.Encoding.CodePages.dll": {}
         },
         "runtime": {
           "lib/netstandard2.0/System.Text.Encoding.CodePages.dll": {}
@@ -4507,12 +4498,12 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
-      "VkNet/1.44.0": {
+      "VkNet/1.46.0": {
         "type": "package",
         "dependencies": {
-          "Flurl": "2.8.1",
-          "Flurl.Http": "2.4.1",
-          "HtmlAgilityPack": "1.11.0",
+          "Flurl": "2.8.2",
+          "Flurl.Http": "2.4.2",
+          "HtmlAgilityPack": "1.11.12",
           "Microsoft.Extensions.DependencyInjection": "2.2.0",
           "Microsoft.Extensions.Logging.Abstractions": "2.2.0"
         },
@@ -4526,63 +4517,14 @@
     }
   },
   "libraries": {
-    "AWSSDK.Core/3.3.103.43": {
-      "sha512": "sVRL7bs68fNHPvs0t+ZAdff2X9HnJH/wgL1onDYAQUrETG1dtrnq6G1QIR3pWoeMneGQVFUqU1mACiHMDJLvfQ==",
+    "Flurl/2.8.2": {
+      "sha512": "3VEYAqkGTGHgla4xuyEB4d8XGLeMX2k05C4WfI7YmKQHsL7RhoGu3L6h1xsKKTPFWjEL13p09XOIGwD1pQ86dg==",
       "type": "package",
-      "path": "awssdk.core/3.3.103.43",
-      "hasTools": true,
+      "path": "flurl/2.8.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "awssdk.core.3.3.103.43.nupkg.sha512",
-        "awssdk.core.nuspec",
-        "lib/MonoAndroid10/AWSSDK.Core.XML",
-        "lib/MonoAndroid10/AWSSDK.Core.dll",
-        "lib/MonoAndroid10/AWSSDK.Core.pdb",
-        "lib/MonoTouch10/AWSSDK.Core.XML",
-        "lib/MonoTouch10/AWSSDK.Core.dll",
-        "lib/Xamarin.Mac20/AWSSDK.Core.XML",
-        "lib/Xamarin.Mac20/AWSSDK.Core.dll",
-        "lib/Xamarin.iOS10/AWSSDK.Core.XML",
-        "lib/Xamarin.iOS10/AWSSDK.Core.dll",
-        "lib/net35/AWSSDK.Core.dll",
-        "lib/net35/AWSSDK.Core.pdb",
-        "lib/net35/AWSSDK.Core.xml",
-        "lib/net45/AWSSDK.Core.dll",
-        "lib/net45/AWSSDK.Core.pdb",
-        "lib/net45/AWSSDK.Core.xml",
-        "lib/netstandard1.3/AWSSDK.Core.dll",
-        "lib/netstandard1.3/AWSSDK.Core.pdb",
-        "lib/netstandard1.3/AWSSDK.Core.xml",
-        "lib/netstandard2.0/AWSSDK.Core.dll",
-        "lib/netstandard2.0/AWSSDK.Core.pdb",
-        "lib/netstandard2.0/AWSSDK.Core.xml",
-        "lib/portable-net45+win8+wpa81+wp8/AWSSDK.Core.XML",
-        "lib/portable-net45+win8+wpa81+wp8/AWSSDK.Core.dll",
-        "lib/portable-net45+win8+wpa81+wp8/AWSSDK.Core.pdb",
-        "lib/uap/AWSSDK.Core.XML",
-        "lib/uap/AWSSDK.Core.dll",
-        "lib/uap/AWSSDK.Core.pdb",
-        "lib/win8/AWSSDK.Core.XML",
-        "lib/win8/AWSSDK.Core.dll",
-        "lib/win8/AWSSDK.Core.pdb",
-        "lib/wp8/AWSSDK.Core.XML",
-        "lib/wp8/AWSSDK.Core.dll",
-        "lib/wp8/AWSSDK.Core.pdb",
-        "lib/wpa81/AWSSDK.Core.XML",
-        "lib/wpa81/AWSSDK.Core.dll",
-        "lib/wpa81/AWSSDK.Core.pdb",
-        "tools/account-management.ps1"
-      ]
-    },
-    "Flurl/2.8.1": {
-      "sha512": "RI3e1vOfhtZJNSsrA/5aEAenC60Dmf/8ODXdSOJ9kHwS+EjXGMjLt8AZKhCPqKSaykUIV/M3FLBsf9vQgLxTxw==",
-      "type": "package",
-      "path": "flurl/2.8.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "flurl.2.8.1.nupkg.sha512",
+        "flurl.2.8.2.nupkg.sha512",
         "flurl.nuspec",
         "lib/net40/Flurl.dll",
         "lib/net40/Flurl.xml",
@@ -4594,14 +4536,14 @@
         "lib/netstandard2.0/Flurl.xml"
       ]
     },
-    "Flurl.Http/2.4.1": {
-      "sha512": "Pt1ErAK5ABGSiWEBFhbV1anEu11ET5yzvD5LkaWZnr7ezVQbcf7lCN++3lGNszth4z6rPFvUx+potvVY6OZSjw==",
+    "Flurl.Http/2.4.2": {
+      "sha512": "VfSJ0DKzh6kf2IOZGG1/JpHajhtqzGp1t+M1QSyFGse7c4Gg1DpH80LTveYea2hV1BEtvPPEp6A4iZ78D8bxGQ==",
       "type": "package",
-      "path": "flurl.http/2.4.1",
+      "path": "flurl.http/2.4.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "flurl.http.2.4.1.nupkg.sha512",
+        "flurl.http.2.4.2.nupkg.sha512",
         "flurl.http.nuspec",
         "lib/net45/Flurl.Http.dll",
         "lib/net45/Flurl.Http.xml",
@@ -4615,18 +4557,21 @@
         "lib/netstandard2.0/Flurl.Http.xml"
       ]
     },
-    "HtmlAgilityPack/1.11.0": {
-      "sha512": "V+M1IO59xDQ7BmSE9Sz+rOYNrEdW8pC5p0Y9BVgxLqrAjxVZA4uRyQmw6zhw9HfCgdOKIsMjkZf4J+rx8VmXZw==",
+    "HtmlAgilityPack/1.11.12": {
+      "sha512": "ZEczeHJJrgtpSz/cJ+8FSa+JVoXSZ5+rSc8XYSUVns8yoLJPXLWdEbgDh5kI4sxZaCswGepByAVW0aExTw4QaQ==",
       "type": "package",
-      "path": "htmlagilitypack/1.11.0",
+      "path": "htmlagilitypack/1.11.12",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "htmlagilitypack.1.11.0.nupkg.sha512",
+        "htmlagilitypack.1.11.12.nupkg.sha512",
         "htmlagilitypack.nuspec",
         "lib/Net20/HtmlAgilityPack.dll",
         "lib/Net20/HtmlAgilityPack.pdb",
         "lib/Net20/HtmlAgilityPack.xml",
+        "lib/Net35/HtmlAgilityPack.dll",
+        "lib/Net35/HtmlAgilityPack.pdb",
+        "lib/Net35/HtmlAgilityPack.xml",
         "lib/Net40-client/HtmlAgilityPack.dll",
         "lib/Net40-client/HtmlAgilityPack.pdb",
         "lib/Net40-client/HtmlAgilityPack.xml",
@@ -7556,10 +7501,10 @@
         "netstandard.library.nuspec"
       ]
     },
-    "Newtonsoft.Json/11.0.2": {
-      "sha512": "IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ==",
+    "Newtonsoft.Json/12.0.2": {
+      "sha512": "rTK0s2EKlfHsQsH6Yx2smvcTCeyoDNgCW7FEYyV01drPlh2T243PR2DiDXqtC5N4GDm4Ma/lkxfW5a/4793vbA==",
       "type": "package",
-      "path": "newtonsoft.json/11.0.2",
+      "path": "newtonsoft.json/12.0.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -7582,7 +7527,7 @@
         "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "newtonsoft.json.11.0.2.nupkg.sha512",
+        "newtonsoft.json.12.0.2.nupkg.sha512",
         "newtonsoft.json.nuspec"
       ]
     },
@@ -10332,10 +10277,10 @@
         "system.runtime.nuspec"
       ]
     },
-    "System.Runtime.CompilerServices.Unsafe/4.5.1": {
-      "sha512": "Zh8t8oqolRaFa9vmOZfdQm/qKejdqz0J9kr7o2Fu0vPeoH3BL1EOXipKWwkWtLT1JPzjByrF19fGuFlNbmPpiw==",
+    "System.Runtime.CompilerServices.Unsafe/4.5.2": {
+      "sha512": "wprSFgext8cwqymChhrBLu62LMg/1u92bU+VOwyfBimSPVFXtsNqEWC92Pf9ofzJFlk4IHmJA75EDJn1b2goAQ==",
       "type": "package",
-      "path": "system.runtime.compilerservices.unsafe/4.5.1",
+      "path": "system.runtime.compilerservices.unsafe/4.5.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -10351,7 +10296,7 @@
         "ref/netstandard1.0/System.Runtime.CompilerServices.Unsafe.xml",
         "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll",
         "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.xml",
-        "system.runtime.compilerservices.unsafe.4.5.1.nupkg.sha512",
+        "system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512",
         "system.runtime.compilerservices.unsafe.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
@@ -11396,10 +11341,10 @@
         "system.text.encoding.nuspec"
       ]
     },
-    "System.Text.Encoding.CodePages/4.5.0": {
-      "sha512": "S0wEUiKcLvRlkFUXca8uio1UQ5bYQzYgOmOKtCqaBQC3GR9AJjh43otcM32IGsAyvadFTaAMw9Irm6dS4Evfng==",
+    "System.Text.Encoding.CodePages/4.5.1": {
+      "sha512": "4J2JQXbftjPMppIHJ7IC+VXQ9XfEagN92vZZNoG12i+zReYlim5dMoXFC1Zzg7tsnKDM7JPo5bYfFK4Jheq44w==",
       "type": "package",
-      "path": "system.text.encoding.codepages/4.5.0",
+      "path": "system.text.encoding.codepages/4.5.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -11417,19 +11362,6 @@
         "lib/xamarinwatchos10/_._",
         "ref/MonoAndroid10/_._",
         "ref/MonoTouch10/_._",
-        "ref/netstandard1.3/System.Text.Encoding.CodePages.dll",
-        "ref/netstandard1.3/System.Text.Encoding.CodePages.xml",
-        "ref/netstandard1.3/de/System.Text.Encoding.CodePages.xml",
-        "ref/netstandard1.3/es/System.Text.Encoding.CodePages.xml",
-        "ref/netstandard1.3/fr/System.Text.Encoding.CodePages.xml",
-        "ref/netstandard1.3/it/System.Text.Encoding.CodePages.xml",
-        "ref/netstandard1.3/ja/System.Text.Encoding.CodePages.xml",
-        "ref/netstandard1.3/ko/System.Text.Encoding.CodePages.xml",
-        "ref/netstandard1.3/ru/System.Text.Encoding.CodePages.xml",
-        "ref/netstandard1.3/zh-hans/System.Text.Encoding.CodePages.xml",
-        "ref/netstandard1.3/zh-hant/System.Text.Encoding.CodePages.xml",
-        "ref/netstandard2.0/System.Text.Encoding.CodePages.dll",
-        "ref/netstandard2.0/System.Text.Encoding.CodePages.xml",
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
@@ -11438,7 +11370,7 @@
         "runtimes/win/lib/netcoreapp2.0/System.Text.Encoding.CodePages.dll",
         "runtimes/win/lib/netstandard1.3/System.Text.Encoding.CodePages.dll",
         "runtimes/win/lib/netstandard2.0/System.Text.Encoding.CodePages.dll",
-        "system.text.encoding.codepages.4.5.0.nupkg.sha512",
+        "system.text.encoding.codepages.4.5.1.nupkg.sha512",
         "system.text.encoding.codepages.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
@@ -12283,10 +12215,10 @@
         "system.xml.xpath.xmldocument.nuspec"
       ]
     },
-    "VkNet/1.44.0": {
-      "sha512": "PAQyUfCFnMR0svNCKThIcCTbYp8Va+ACqDwGNqd397RxfaXgKKYnKTQ4VPtaMjHDRiylPVKzACepI9WFUvar7g==",
+    "VkNet/1.46.0": {
+      "sha512": "Lda57ynsZdyMubrJVtqm5ML+C0AD+eZtM1FnttSjv4uaHVftBLwbVmCHWGQNvTmtg1yoVp4vb4T2rULkkkyUoA==",
       "type": "package",
-      "path": "vknet/1.44.0",
+      "path": "vknet/1.46.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -12298,43 +12230,45 @@
         "lib/net461/VkNet.xml",
         "lib/netstandard2.0/VkNet.dll",
         "lib/netstandard2.0/VkNet.xml",
-        "vknet.1.44.0.nupkg.sha512",
+        "vknet.1.46.0.nupkg.sha512",
         "vknet.nuspec"
       ]
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
-      "AWSSDK.Core >= 3.3.103.43",
       "Microsoft.AspNetCore.App >= 2.2.0",
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
+      "Microsoft.AspNetCore.Server.Kestrel >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0",
-      "VkNet >= 1.44.0"
+      "VkNet >= 1.46.0"
     ]
   },
   "packageFolders": {
-    "/home/artem_gg/.nuget/packages/": {},
-    "/usr/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\Artem_GG\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/artem_gg/Documents/Projects/C#/NpmBotVk/NapominalkaBot/VkBot.csproj",
+      "projectUniqueName": "C:\\Users\\Artem_GG\\source\\repos\\FirstBot\\NpmVkBot\\NapominalkaBot\\VkBot.csproj",
       "projectName": "VkBot",
-      "projectPath": "/home/artem_gg/Documents/Projects/C#/NpmBotVk/NapominalkaBot/VkBot.csproj",
-      "packagesPath": "/home/artem_gg/.nuget/packages/",
-      "outputPath": "/home/artem_gg/Documents/Projects/C#/NpmBotVk/NapominalkaBot/obj/",
+      "projectPath": "C:\\Users\\Artem_GG\\source\\repos\\FirstBot\\NpmVkBot\\NapominalkaBot\\VkBot.csproj",
+      "packagesPath": "C:\\Users\\Artem_GG\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Artem_GG\\source\\repos\\FirstBot\\NpmVkBot\\NapominalkaBot\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/home/artem_gg/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Artem_GG\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.2"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -12351,10 +12285,6 @@
     "frameworks": {
       "netcoreapp2.2": {
         "dependencies": {
-          "AWSSDK.Core": {
-            "target": "Package",
-            "version": "[3.3.103.43, )"
-          },
           "Microsoft.AspNetCore.App": {
             "suppressParent": "All",
             "target": "Package",
@@ -12366,6 +12296,10 @@
             "target": "Package",
             "version": "[2.2.0, )"
           },
+          "Microsoft.AspNetCore.Server.Kestrel": {
+            "target": "Package",
+            "version": "[2.2.0, )"
+          },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
@@ -12374,7 +12308,7 @@
           },
           "VkNet": {
             "target": "Package",
-            "version": "[1.44.0, )"
+            "version": "[1.46.0, )"
           }
         },
         "imports": [
@@ -12387,7 +12321,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.0.100/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

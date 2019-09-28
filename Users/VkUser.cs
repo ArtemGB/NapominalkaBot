@@ -9,6 +9,7 @@ namespace VkBot.Users
     {
         public long VkId { get; private set; }
         public List<UserTask> Tasks;
+        public bool IsTaskChangingInProgress;//ѕоказывает, выполн€етс€ ли сейчас кака€-либо операци€.
 
         public VkUser(long VkId)
         {

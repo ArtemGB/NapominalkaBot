@@ -1,5 +1,5 @@
 {
-  "FilePath": "/home/artem_gg/Documents/Projects/C#/NpmBotVk/NapominalkaBot/VkBot.csproj",
+  "FilePath": "c:\\Users\\Artem_GG\\source\\repos\\FirstBot\\NpmVkBot\\NapominalkaBot\\VkBot.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-2.1",
     "LanguageVersion": "2.1",
@@ -2956,7 +2956,7 @@
         }
       }
     ],
-    "CSharpLanguageVersion": 800
+    "CSharpLanguageVersion": 703
   },
   "RootNamespace": "VkBot",
   "Documents": [],
