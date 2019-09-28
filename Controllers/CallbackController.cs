@@ -32,6 +32,8 @@ namespace VkBot.Controllers
             this.configuration = configuration;
             vkApi = _vkApi;
             tasker = new Tasker(vkApi);
+            Tasker.allUsers = Tasker.OpenAll();
+            Console.WriteLine("Constructor CallbackComtroller");
         }
 
         [HttpPost]
@@ -52,6 +54,7 @@ namespace VkBot.Controllers
                         if (!Tasker.allUsers.Users.ContainsKey(msg.FromId.Value)) //Добавление нового пользователя.
                         {
                             Tasker.allUsers.Users.Add(msg.FromId.Value, new VkUser(msg.FromId.Value));
+                            Tasker.SaveAll();
                             VKSendMsg(msg.PeerId.Value, MsgTexts.HelloNewUser);
                         }
                         else
@@ -112,7 +115,7 @@ namespace VkBot.Controllers
                     }
                 case "время"://Для тестов.
                     {
-                        VKSendMsg(msg.PeerId.Value, DateTime.Now.AddHours(3).ToLocalTime().ToString());
+                        VKSendMsg(msg.PeerId.Value, DateTime.Now.ToLocalTime().ToString());
                         break;
                     }
                 case "время сообщения"://Для тестов.
