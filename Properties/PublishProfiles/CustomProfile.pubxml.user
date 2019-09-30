@@ -44,16 +44,16 @@
       <publishTime>11/29/2018 15:39:20</publishTime>
     </File>
     <File Include="System.Xml.XPath.XmlDocument.dll">
-      <publishTime>05/11/2016 04:57:34</publishTime>
+      <publishTime>11/05/2016 04:57:34</publishTime>
     </File>
     <File Include="VkBot.deps.json">
-      <publishTime>09/29/2019 02:30:19</publishTime>
+      <publishTime>10/01/2019 02:30:54</publishTime>
     </File>
     <File Include="VkBot.dll">
-      <publishTime>09/29/2019 02:30:18</publishTime>
+      <publishTime>10/01/2019 02:30:53</publishTime>
     </File>
     <File Include="VkBot.pdb">
-      <publishTime>09/29/2019 02:30:18</publishTime>
+      <publishTime>10/01/2019 02:30:53</publishTime>
     </File>
     <File Include="VkBot.runtimeconfig.json">
       <publishTime>09/29/2019 02:30:19</publishTime>
@@ -62,7 +62,7 @@
       <publishTime>09/03/2019 14:12:32</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>09/29/2019 02:30:19</publishTime>
+      <publishTime>10/01/2019 02:30:54</publishTime>
     </File>
   </ItemGroup>
 </Project>

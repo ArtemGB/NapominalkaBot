@@ -29,7 +29,7 @@ namespace VkBot
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddSingleton<Microsoft.Extensions.Hosting.IHostedService, RemindService>();
+            //services.AddSingleton<Microsoft.Extensions.Hosting.IHostedService, RemindService>();
             services.AddSingleton<IVkApi>(sp =>
             {
                 var api = new VkApi();
