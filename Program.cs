@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Server.Kestrel;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using System.Net;
 using System.Diagnostics;
+using FluentScheduler;
 
 namespace VkBot
 {
@@ -18,20 +19,7 @@ namespace VkBot
     {
         public static void Main(string[] args)
         {
-            Process[] pname = Process.GetProcessesByName("Reminder");
-            if (pname.Length == 0)
-            {
-                Console.WriteLine("Timer doesn't works.");
-                Process process = new Process();
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.FileName = "dotnet";
-                startInfo.Arguments =@".\Data\Reminder.dll";
-                process.StartInfo = startInfo;
-                process.Start();
-                Console.WriteLine("Timer has been activated.");
-            }
-            else
-                Console.WriteLine("Timer works.");
+            JobManager.Initialize(new ReminRegistry()); //Регистрируем задачу таймера напоминаний.
             BuildWebHost(args).Run();
         }
 

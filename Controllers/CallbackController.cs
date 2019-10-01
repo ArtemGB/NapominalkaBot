@@ -25,7 +25,6 @@ namespace VkBot.Controllers
         private readonly IConfiguration configuration;
         private static IVkApi vkApi;
         private static Tasker tasker;
-        //private static AllUsers allUsers = new AllUsers();
 
 
         public CallbackController(IVkApi _vkApi, IConfiguration configuration)
@@ -33,14 +32,7 @@ namespace VkBot.Controllers
             this.configuration = configuration;
             vkApi = _vkApi;
             tasker = new Tasker(vkApi);
-            Tasker.allUsers = Tasker.OpenAll();
-            Console.WriteLine("Constructor CallbackComtroller");
-        }
-
-        ~CallbackController()
-        {
-            Tasker.SaveAll();
-            Console.WriteLine("Destructor.");
+            Tasker.allUsers = Tasker.OpenAll(); //Открывем файл с данными пользователей.
         }
 
         [HttpPost]
@@ -58,7 +50,8 @@ namespace VkBot.Controllers
                 case "message_new":
                     {
                         var msg = Message.FromJson(new VkResponse(updates.Object));
-                        if (!Tasker.allUsers.Users.ContainsKey(msg.FromId.Value)) //Добавление нового пользователя.
+                        //Добавление нового пользователя.
+                        if (!Tasker.allUsers.Users.ContainsKey(msg.FromId.Value)) 
                         {
                             Tasker.allUsers.Users.Add(msg.FromId.Value, new VkUser(msg.FromId.Value));
                             Tasker.SaveAll();
@@ -68,16 +61,12 @@ namespace VkBot.Controllers
                             MsgReceiver(msg);
                         break;
                     }
-                    //До лучших времён.
-                    /* case "group_join":
-                        {
-                            break;
-                        } */
             }
             return Ok("ok");
         }
 
-        public IActionResult VKSendMsg(long _PeerId, string MsgText)
+        //Отправка сообщения пользователю.
+        public IActionResult VKSendMsg(long _PeerId, string MsgText) 
         {
             vkApi.Messages.Send(new MessagesSendParams
             {
@@ -88,10 +77,12 @@ namespace VkBot.Controllers
             return new OkObjectResult("ok");
         }
 
+        //Обработчик входящих сообщений.
         public void MsgReceiver(Message msg)
         {
             string mess = msg.Text.ToLower(); //Переводим всё в нижний регистр.
             mess = mess.Replace(".", "").Replace(",", "").Replace(")", "").Replace("(", "").Replace("?", ""); //Убираем лишние символы.
+            //Отменяем выполнение операции, если в процессе её выполнения пользователь написал слово "отмена".
             if (mess == "отмена" && Tasker.allUsers.Users[msg.FromId.Value].IsTaskChangingInProgress == true)
             {
                 Tasker.allUsers.Users[msg.FromId.Value].IsTaskChangingInProgress = false;
@@ -99,11 +90,13 @@ namespace VkBot.Controllers
                 VKSendMsg(msg.PeerId.Value, MsgTexts.Cancel);
                 return;
             }
+            //Если выполняется какая-либо операция, то продолжаем её выполнять.
             if (Tasker.allUsers.Users[msg.FromId.Value].IsTaskChangingInProgress == true)
             {
                 Tasker.TaskProcces(msg);
                 return;
             }
+            //Выбираем нужное действие в зависимости от того, что написал пользователь.
             switch (mess)
             {
                 case "напомни":
@@ -140,7 +133,7 @@ namespace VkBot.Controllers
                                 users += user.Value.VkId + "\n";
                             VKSendMsg(msg.PeerId.Value, users);
                         }
-                        else VKSendMsg(msg.PeerId.Value, "Пользователей нет.");
+                        else VKSendMsg(msg.PeerId.Value, MsgTexts.NoUsers);
                         break;
                     }
                 case "id":

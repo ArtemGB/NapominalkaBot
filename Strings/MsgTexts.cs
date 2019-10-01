@@ -24,5 +24,6 @@ namespace VkBot.Strings
         public readonly static string DontUnderstand = "Чёт я тебя не понял.( Напиши слово \"Инструкция\" и я скажу, что умею.";
         public readonly static string Remind = "Хэй, ты просил меня напомнить тебе вот это: ";
         public readonly static string EndRemind = "\n Буду рад напомнить ещё что-нибудь.))";
+        public readonly static string NoUsers = "Пользователей нет.";
     }
 }

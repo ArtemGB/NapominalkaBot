@@ -22,7 +22,6 @@ namespace VkBot.Controllers
         private static IVkApi vkApi;
         public static AllUsers allUsers; //Хранит все данные пользователей.
 
-        //public static bool IsTaskChangingInProgress;//Показывает, выполняется ли сейчас какая-либо операция.
         public delegate void TaskDelegat(Message msg);
         public static TaskDelegat TaskProcces; //Переключатель методов выполнения операций с напоминаниями.
 
@@ -128,7 +127,6 @@ namespace VkBot.Controllers
             SaveAll();
         }
 
-        //@Environment.CurrentDirectory
         public static void SaveAll()//Сериализует пользователей и их данные в файл.
         {
             BinaryFormatter bf = new BinaryFormatter();

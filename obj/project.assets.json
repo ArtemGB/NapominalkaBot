@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.2": {
+      "FluentScheduler/5.3.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard1.4/FluentScheduler.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.4/FluentScheduler.dll": {}
+        }
+      },
       "Flurl/2.8.2": {
         "type": "package",
         "compile": {
@@ -4517,6 +4526,23 @@
     }
   },
   "libraries": {
+    "FluentScheduler/5.3.0": {
+      "sha512": "XBLwqw3FFdkG6qIrxg7M9mIsigZje+qKTinWZWfyr47IN6O/0z6fFUoQCVEBvY0lk1puf4hU0VnVhN/kPNZL+A==",
+      "type": "package",
+      "path": "fluentscheduler/5.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "fluentscheduler.5.3.0.nupkg.sha512",
+        "fluentscheduler.nuspec",
+        "lib/net40/FluentScheduler.dll",
+        "lib/net40/FluentScheduler.pdb",
+        "lib/net40/FluentScheduler.xml",
+        "lib/netstandard1.4/FluentScheduler.dll",
+        "lib/netstandard1.4/FluentScheduler.pdb",
+        "lib/netstandard1.4/FluentScheduler.xml"
+      ]
+    },
     "Flurl/2.8.2": {
       "sha512": "3VEYAqkGTGHgla4xuyEB4d8XGLeMX2k05C4WfI7YmKQHsL7RhoGu3L6h1xsKKTPFWjEL13p09XOIGwD1pQ86dg==",
       "type": "package",
@@ -12237,6 +12263,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
+      "FluentScheduler >= 5.3.0",
       "Microsoft.AspNetCore.App >= 2.2.0",
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
       "Microsoft.AspNetCore.Server.Kestrel >= 2.2.0",
@@ -12285,6 +12312,10 @@
     "frameworks": {
       "netcoreapp2.2": {
         "dependencies": {
+          "FluentScheduler": {
+            "target": "Package",
+            "version": "[5.3.0, )"
+          },
           "Microsoft.AspNetCore.App": {
             "suppressParent": "All",
             "target": "Package",

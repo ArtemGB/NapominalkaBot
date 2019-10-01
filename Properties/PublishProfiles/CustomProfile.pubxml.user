@@ -19,6 +19,9 @@
     <File Include="AWSSDK.Core.dll">
       <publishTime>09/23/2019 12:16:54</publishTime>
     </File>
+    <File Include="FluentScheduler.dll">
+      <publishTime>06/23/2017 20:04:14</publishTime>
+    </File>
     <File Include="Flurl.dll">
       <publishTime>04/28/2019 16:33:26</publishTime>
     </File>
@@ -44,25 +47,25 @@
       <publishTime>11/29/2018 15:39:20</publishTime>
     </File>
     <File Include="System.Xml.XPath.XmlDocument.dll">
-      <publishTime>11/05/2016 04:57:34</publishTime>
+      <publishTime>05/11/2016 04:57:34</publishTime>
     </File>
     <File Include="VkBot.deps.json">
-      <publishTime>10/01/2019 02:30:54</publishTime>
+      <publishTime>10/01/2019 18:24:48</publishTime>
     </File>
     <File Include="VkBot.dll">
-      <publishTime>10/01/2019 02:30:53</publishTime>
+      <publishTime>10/01/2019 18:24:47</publishTime>
     </File>
     <File Include="VkBot.pdb">
-      <publishTime>10/01/2019 02:30:53</publishTime>
+      <publishTime>10/01/2019 18:24:47</publishTime>
     </File>
     <File Include="VkBot.runtimeconfig.json">
-      <publishTime>09/29/2019 02:30:19</publishTime>
+      <publishTime>10/01/2019 17:54:46</publishTime>
     </File>
     <File Include="VkNet.dll">
-      <publishTime>09/03/2019 14:12:32</publishTime>
+      <publishTime>03/09/2019 14:12:32</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>10/01/2019 02:30:54</publishTime>
+      <publishTime>10/01/2019 18:24:48</publishTime>
     </File>
   </ItemGroup>
 </Project>
