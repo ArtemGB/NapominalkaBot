@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using System;
 
@@ -9,7 +8,7 @@ namespace VkBot.Users
     {
         public long VkId { get; private set; }
         public List<UserTask> Tasks;
-        public bool IsTaskChangingInProgress;//Показывает, выполняется ли сейчас какая-либо операция.
+        public bool IsTaskChangingInProgress;//РџРѕРєР°Р·С‹РІР°РµС‚, РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ Р»Рё СЃРµР№С‡Р°СЃ РєР°РєР°СЏ-Р»РёР±Рѕ РѕРїРµСЂР°С†РёСЏ.
 
         public VkUser(long VkId)
         {

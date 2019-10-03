@@ -1,15 +1,11 @@
-using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-using System.Threading.Tasks;
 using System;
 using Microsoft.AspNetCore.Mvc;
 using VkNet.Model;
 using VkNet.Model.RequestParams;
 using VkNet.Abstractions;
-using System.Collections.Generic;
 using VkBot.Users;
-using System.Threading;
 using VkBot.Strings;
 
 namespace VkBot.Controllers
@@ -25,12 +21,14 @@ namespace VkBot.Controllers
         public delegate void TaskDelegat(Message msg);
         public static TaskDelegat TaskProcces; //Переключатель методов выполнения операций с напоминаниями.
 
-        //private static int TimerI = 0;
         public Tasker(IVkApi _vkApi)
         {
             vkApi = _vkApi;
         }
 
+        /// <summary>
+        /// Отправляет пользователю сообщение с просьбой ввести текст напоминания.
+        /// </summary>
         public static void StartTaskAdding(Message msg)//Начинает процесс сохранения напоминания.
         {
             allUsers.Users[msg.FromId.Value].IsTaskChangingInProgress = true;
@@ -39,6 +37,9 @@ namespace VkBot.Controllers
             TaskProcces = AddTaskText;
         }
 
+        /// <summary>
+        /// Сохраняет текст напоминания и просит пользователя ввести время.
+        /// </summary>
         public static void AddTaskText(Message msg)//Сохраняет текст напоминания.
         {
             allUsers.Users[msg.FromId.Value].Tasks.Add(new UserTask(msg.Text, new DateTime()));
@@ -47,7 +48,10 @@ namespace VkBot.Controllers
             TaskProcces = AddTaskDate;
         }
 
-        public static void AddTaskDate(Message msg)//Добавление даты напоминания.
+        /// <summary>
+        /// Добавление даты напоминания.
+        /// </summary>
+        public static void AddTaskDate(Message msg)
         {
             try
             {
@@ -87,6 +91,9 @@ namespace VkBot.Controllers
             }
         }
 
+        /// <summary>
+        /// Сообщает об успешном завершении добавления напоминания.
+        /// </summary>
         public static void AddTaskComplete(Message msg)
         {
             VKSendMsg(msg.PeerId.Value, "Напоминание добавлено.");
@@ -94,7 +101,10 @@ namespace VkBot.Controllers
             SaveAll();
         }
 
-        public static void ShowTasks(Message msg)//Показывает все напоминания для текущего пользователя.
+        /// <summary>
+        /// Показывает список всех напоминаний для пользователя.
+        /// </summary>
+        public static void ShowTasks(Message msg)
         {
             if (allUsers.Users[msg.FromId.Value].Tasks.Count != 0)
             {
@@ -107,7 +117,9 @@ namespace VkBot.Controllers
 
         }
 
-        //Отправляет сообщение пользователю.
+        /// <summary>
+        /// Отправляет сообщение пользователю.
+        /// </summary>
         public static IActionResult VKSendMsg(long _PeerId, string MsgText)
         {
             vkApi.Messages.Send(new MessagesSendParams
@@ -120,6 +132,9 @@ namespace VkBot.Controllers
         }
 
         //Сделать запрос на подтверждение.
+        /// <summary>
+        /// Очищает список всех напоминаний.
+        /// </summary>
         public static void ClearTasks(long FromId)//Очищает список напоминаний.
         {
             allUsers.Users[FromId].Tasks.Clear();
@@ -127,7 +142,10 @@ namespace VkBot.Controllers
             SaveAll();
         }
 
-        public static void SaveAll()//Сериализует пользователей и их данные в файл.
+        /// <summary>
+        /// Сериализует пользователей и их данные в файл.
+        /// </summary>
+        public static void SaveAll()
         {
             BinaryFormatter bf = new BinaryFormatter();
             try
@@ -136,7 +154,6 @@ namespace VkBot.Controllers
                 {
                     bf.Serialize(fs, allUsers);
                 }
-                Console.WriteLine("Save was succes");
             }
             catch (Exception e)
             {
@@ -144,7 +161,10 @@ namespace VkBot.Controllers
             }
         }
 
-        public static AllUsers OpenAll()//Десериализует данные пользователей.
+        /// <summary>
+        /// Десериализует данные пользователей.
+        /// </summary>
+        public static AllUsers OpenAll()
         {
             BinaryFormatter bf = new BinaryFormatter();
             AllUsers users;
@@ -155,12 +175,10 @@ namespace VkBot.Controllers
                     if (fs.Length == 0)
                     {
                         users = new AllUsers();
-                        //users.Users.Add(99999, new VkUser(99999)); //Костыль - юзер пустышка.
                     }
                     else users = (AllUsers)bf.Deserialize(fs);
                 }
-                Console.WriteLine("Open was succes");
-                //VKSendMsg(82749439, "Open was succes.");
+                //Console.WriteLine("Open was succes");
                 return users;
             }
             catch (Exception e)

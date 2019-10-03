@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using VkNet;
 using VkNet.Abstractions;
 using VkNet.Model;
+using VkBot.Reminder;
 
 namespace VkBot
 {
@@ -35,6 +29,8 @@ namespace VkBot
                 api.Authorize(new ApiAuthParams { AccessToken = Configuration["Config:AccessToken"] });
                 return api;
             });
+            //Регистрируем сервис, который будет напоминать пользователям выполнять их задачи.
+            services.AddHostedService<ReminderHostedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

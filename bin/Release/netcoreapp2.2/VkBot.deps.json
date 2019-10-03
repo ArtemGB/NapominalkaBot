@@ -24,7 +24,6 @@
     ".NETCoreApp,Version=v2.2": {
       "VkBot/1.0.0": {
         "dependencies": {
-          "FluentScheduler": "5.3.0",
           "Microsoft.AspNetCore.App": "2.2.0",
           "Microsoft.AspNetCore.Razor.Design": "2.2.0",
           "Microsoft.AspNetCore.Server.Kestrel": "2.2.0",
@@ -36,17 +35,6 @@
         },
         "compile": {
           "VkBot.dll": {}
-        }
-      },
-      "FluentScheduler/5.3.0": {
-        "runtime": {
-          "lib/netstandard1.4/FluentScheduler.dll": {
-            "assemblyVersion": "5.3.0.0",
-            "fileVersion": "5.3.0.0"
-          }
-        },
-        "compile": {
-          "lib/netstandard1.4/FluentScheduler.dll": {}
         }
       },
       "Flurl/2.8.2": {
@@ -146,7 +134,7 @@
         "runtime": {
           "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.dll": {
             "assemblyVersion": "4.0.4.1",
-            "fileVersion": "4.6.26919.2"
+            "fileVersion": "4.0.0.0"
           }
         },
         "compile": {
@@ -3359,13 +3347,6 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
-    },
-    "FluentScheduler/5.3.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-XBLwqw3FFdkG6qIrxg7M9mIsigZje+qKTinWZWfyr47IN6O/0z6fFUoQCVEBvY0lk1puf4hU0VnVhN/kPNZL+A==",
-      "path": "fluentscheduler/5.3.0",
-      "hashPath": "fluentscheduler.5.3.0.nupkg.sha512"
     },
     "Flurl/2.8.2": {
       "type": "package",

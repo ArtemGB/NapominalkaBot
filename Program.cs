@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Server.Kestrel;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using System.Net;
-using System.Diagnostics;
-using FluentScheduler;
 
 namespace VkBot
 {
@@ -19,7 +10,6 @@ namespace VkBot
     {
         public static void Main(string[] args)
         {
-            JobManager.Initialize(new ReminRegistry()); //Регистрируем задачу таймера напоминаний.
             BuildWebHost(args).Run();
         }
 
@@ -35,7 +25,7 @@ namespace VkBot
                 options.Limits.MinResponseDataRate =
                     new MinDataRate(bytesPerSecond: 100, gracePeriod: TimeSpan.FromSeconds(10));
                 options.Listen(IPAddress.Loopback, 5000);
-                options.Limits.KeepAliveTimeout = TimeSpan.FromDays(10);
+                options.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(5);
             })
             .Build();
     }

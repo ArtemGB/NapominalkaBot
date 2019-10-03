@@ -1,6 +1,4 @@
 using System;
-using System.Threading.Tasks;
-
 
 namespace VkBot.Users
 {
@@ -15,6 +13,6 @@ namespace VkBot.Users
             this.TaskDate = TaskDate;
         }
 
-        public override string ToString() => TaskText + " " + TaskDate.ToShortDateString() + " " + TaskDate.ToShortTimeString();
+        public override string ToString() => TaskText + "\n" + TaskDate.ToShortDateString() + " " + TaskDate.ToShortTimeString();
     }
 }
