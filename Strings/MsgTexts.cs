@@ -28,5 +28,6 @@ namespace VkBot.Strings
         public readonly static string Remind = "Хэй, ты просил меня напомнить тебе вот это: \n";
         public readonly static string EndRemind = "\n Пиши ещё, буду рад напомнить ещё что-нибудь.))";
         public readonly static string NoUsers = "Пользователей нет.";
+        public readonly static string Thanks = "Был рад помочь.))";
     }
 }

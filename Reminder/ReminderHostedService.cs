@@ -69,7 +69,7 @@ namespace VkBot.Reminder
         public void Remind()
         {
             VkApi api = new VkApi();
-            api.Authorize(new ApiAuthParams { AccessToken = "fa82ca901cffa5f36b0f92fd860d6984d1df297f1457da04c6032eddd168bd1b9f57245e97d299c7106ad" });
+            api.Authorize(new ApiAuthParams { AccessToken = "MyAccessToken" });
             Users.AllUsers allUsers = Controllers.Tasker.OpenAll(); //Открываем файл с данными пользователей.
             DateTime UtcNow = DateTime.UtcNow.AddHours(3); //Текущая дата.
             if (allUsers == null) return; //Выходим, если файл с данными пустой.

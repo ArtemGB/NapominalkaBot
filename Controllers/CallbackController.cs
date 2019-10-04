@@ -140,6 +140,11 @@ namespace VkBot.Controllers
                         VKSendMsg(msg.PeerId.Value, msg.FromId.Value.ToString());
                         break;
                     }
+                case "спасибо":
+                    {
+                        VKSendMsg(msg.PeerId.Value, MsgTexts.Thanks);
+                        break;
+                    }
                 default:
                     {
                         string Answer;
