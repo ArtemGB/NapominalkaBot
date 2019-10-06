@@ -78,7 +78,7 @@ namespace VkBot.Reminder
                 foreach (var tsk in usr.Value.Tasks)
                 {
                     TimeSpan Difference = UtcNow.Subtract(tsk.TaskDate);
-                    if (Difference.Days == 0 && Difference.Hours == 0 && Math.Abs(Difference.Minutes) < 2)
+                    if ((Difference.Days == 0 && Difference.Hours == 0 && Math.Abs(Difference.Minutes) < 2) || tsk.TaskDate < UtcNow)
                     {
                         //Наломинаем пользователю о его задаче.
                         api.Messages.Send(new MessagesSendParams
