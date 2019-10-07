@@ -42,7 +42,7 @@ namespace VkBot.Controllers
         /// </summary>
         public static void AddTaskText(Message msg)//Сохраняет текст напоминания.
         {
-            allUsers.Users[msg.FromId.Value].Tasks.Add(new UserTask(msg.Text, new DateTime()));
+            allUsers.Users[msg.FromId.Value].Tasks.Add(new UserTask(msg.Text, new DateTime().AddYears(9999)));
             SaveAll();
             VKSendMsg(msg.PeerId.Value, MsgTexts.TaskDateAddingInstruction);
             TaskProcces = AddTaskDate;
@@ -178,7 +178,6 @@ namespace VkBot.Controllers
                     }
                     else users = (AllUsers)bf.Deserialize(fs);
                 }
-                //Console.WriteLine("Open was succes");
                 return users;
             }
             catch (Exception e)

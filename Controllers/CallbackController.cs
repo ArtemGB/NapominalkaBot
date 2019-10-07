@@ -71,6 +71,14 @@ namespace VkBot.Controllers
         }
 
         /// <summary>
+        /// Даёт ответ планировщику задач на хостинге.
+        /// </summary>
+        public IActionResult AnswerToServer()
+        {
+            return Ok();
+        }
+
+        /// <summary>
         /// Отправка сообщения пользователю.
         /// </summary>
         private IActionResult VKSendMsg(long _PeerId, string MsgText)
