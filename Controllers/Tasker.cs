@@ -42,7 +42,7 @@ namespace VkBot.Controllers
         /// </summary>
         public static void AddTaskText(Message msg)//Сохраняет текст напоминания.
         {
-            allUsers.Users[msg.FromId.Value].Tasks.Add(new UserTask(msg.Text, new DateTime().AddYears(9999)));
+            allUsers.Users[msg.FromId.Value].Tasks.Add(new UserTask(msg.Text, new DateTime().AddYears(5000)));
             SaveAll();
             VKSendMsg(msg.PeerId.Value, MsgTexts.TaskDateAddingInstruction);
             TaskProcces = AddTaskDate;

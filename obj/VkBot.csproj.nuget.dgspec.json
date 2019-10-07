@@ -1,28 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "/home/artem_gg/Documents/Projects/C#/NpmBotVk/NapominalkaBot/VkBot.csproj": {}
+    "C:\\Users\\Artem_GG\\source\\repos\\FirstBot\\NpmVkBot\\NapominalkaBot\\VkBot.csproj": {}
   },
   "projects": {
-    "/home/artem_gg/Documents/Projects/C#/NpmBotVk/NapominalkaBot/VkBot.csproj": {
+    "C:\\Users\\Artem_GG\\source\\repos\\FirstBot\\NpmVkBot\\NapominalkaBot\\VkBot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/artem_gg/Documents/Projects/C#/NpmBotVk/NapominalkaBot/VkBot.csproj",
+        "projectUniqueName": "C:\\Users\\Artem_GG\\source\\repos\\FirstBot\\NpmVkBot\\NapominalkaBot\\VkBot.csproj",
         "projectName": "VkBot",
-        "projectPath": "/home/artem_gg/Documents/Projects/C#/NpmBotVk/NapominalkaBot/VkBot.csproj",
-        "packagesPath": "/home/artem_gg/.nuget/packages/",
-        "outputPath": "/home/artem_gg/Documents/Projects/C#/NpmBotVk/NapominalkaBot/obj/",
+        "projectPath": "C:\\Users\\Artem_GG\\source\\repos\\FirstBot\\NpmVkBot\\NapominalkaBot\\VkBot.csproj",
+        "packagesPath": "C:\\Users\\Artem_GG\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Artem_GG\\source\\repos\\FirstBot\\NpmVkBot\\NapominalkaBot\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "/home/artem_gg/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Artem_GG\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -75,7 +77,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.0.100/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

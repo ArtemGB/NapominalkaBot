@@ -103,6 +103,9 @@ namespace VkBot.Controllers
             if (mess == "отмена" && Tasker.allUsers.Users[msg.FromId.Value].IsTaskChangingInProgress == true)
             {
                 Tasker.allUsers.Users[msg.FromId.Value].IsTaskChangingInProgress = false;
+                //Удаляем последнюю запись, если уже был добавлен текст, иначе просто выходим из операции.
+                if (Tasker.TaskProcces == Tasker.AddTaskDate)
+                    Tasker.allUsers.Users[msg.FromId.Value].Tasks.RemoveAt(Tasker.allUsers.Users[msg.FromId.Value].Tasks.Count - 1);
                 Tasker.SaveAll();
                 VKSendMsg(msg.PeerId.Value, MsgTexts.Cancel);
                 return;
